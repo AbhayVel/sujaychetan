@@ -1,0 +1,5 @@
+need to change
+core.php, logout.php, index.php
+header('location: http://localhost/stock/index.php');	
+
+SELECT product.product_name, order_item.quantity,order_item.rate, order_item.total,orders.client_name,orders.order_date FROM order_item , product,orders where order_item.product_id=product.product_id AND order_item.order_id = orders.order_id

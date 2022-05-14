@@ -1,0 +1,338 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <ol class="breadcrumb">
+          <li><a href="http://localhost/stock/dashboard.php">Home</a></li>
+          <li class="active">Product</li>
+        </ol>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Product</div>
+          </div> <!-- /panel-heading -->
+          <div class="panel-body">
+
+            <div class="remove-messages"></div>
+
+            <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;">
+              <button class="btn btn-default button1" data-toggle="modal" id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Product </button>
+            </div> <!-- /div-action -->
+
+            <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;"><a class="btn btn-default button1" id="viewProductModalBtn" type="button" href="http://localhost/stock/productview.php" target="_blank"> View Total Stock </a>
+
+            </div> <!-- /div-action -->
+
+            <div id="manageProductTable_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="manageProductTable_length"><label>Show <select name="manageProductTable_length" aria-controls="manageProductTable" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="manageProductTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="manageProductTable"></label></div>
+
+            {{products | json}}
+            <table class="table dataTable no-footer" id="manageProductTable" role="grid" aria-describedby="manageProductTable_info" style="width: 1108px;">
+              <thead>
+                <tr role="row">
+                  <th style="width: 75px;" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Photo: activate to sort column ascending">Photo2</th>
+                  <th (click)="sort('productName')"  class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Product Name: activate to sort column ascending" style="width: 218px;">Product Name</th>
+                  <th (click)="sort('rate')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Rate: activate to sort column ascending" style="width: 30px;">Rate</th>
+                  <th (click)="sort('currentQuantity')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Current Quantity(Stock): activate to sort column ascending" style="width: 93px;">Current Quantity<br>(Stock)</th>
+                  <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Total Quantity (Stock): activate to sort column ascending" style="width: 81px;">Total Quantity <br>(Stock)</th><th class="sorting_asc" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Brand: activate to sort column descending" style="width: 54px;" aria-sort="ascending">Brand</th><th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 61px;">Category</th>
+                  <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 43px;">Status</th><th style="width: 130px;" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Options: activate to sort column ascending">Options</th></tr>
+              </thead>
+            <tbody>
+
+        <tr *ngFor="let p of products" role="row" class="odd">
+          <td><img class="img-round" src="./Stock Management System_files/1874199910604c8007e0e19.jpg" style="height:30px; width:50px;"></td>
+          <td [textContent]="p.productName"></td>
+          <td [innerHTML]="p.rate"></td>
+          <td [innerText]="p.currentQuantity"></td>
+          <td [textContent]="p.totalQuantity">14</td>
+          <td class="sorting_1">Automobile</td><td>Automobile</td><td><label class="label label-success">Available</label></td><td>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct(255)"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+
+        </ul>
+      </div></td></tr>
+
+
+
+    </tbody></table><div class="dataTables_info" id="manageProductTable_info" role="status" aria-live="polite">Showing 1 to 10 of 286 entries</div><div class="dataTables_paginate paging_simple_numbers" id="manageProductTable_paginate"><a class="paginate_button previous disabled" aria-controls="manageProductTable" data-dt-idx="0" tabindex="0" id="manageProductTable_previous">Previous</a><span><a class="paginate_button current" aria-controls="manageProductTable" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="5" tabindex="0">5</a><span class="ellipsis">…</span><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="6" tabindex="0">29</a></span><a class="paginate_button next" aria-controls="manageProductTable" data-dt-idx="7" tabindex="0" id="manageProductTable_next">Next</a></div></div>
+            <!-- /table -->
+
+          </div> <!-- /panel-body -->
+        </div> <!-- /panel -->
+      </div> <!-- /col-md-12 -->
+    </div> <!-- /row -->
+
+
+    <!-- add product -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <form class="form-horizontal" id="submitProductForm" action="http://localhost/stock/php_action/createProduct.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title"><i class="fa fa-plus"></i> Add Product</h4>
+            </div>
+
+            <div class="modal-body" style="max-height:450px; overflow:auto;">
+
+              <div id="add-product-messages"></div>
+
+              <div class="form-group">
+                <label for="productImage" class="col-sm-3 control-label">Product Image: </label>
+                <label class="col-sm-1 control-label">: </label>
+                <div class="col-sm-8">
+                  <!-- the avatar markup -->
+                  <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>
+                  <div class="kv-avatar center-block">
+                      <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" style="width:auto;">
+                  </div>
+
+                </div>
+              </div> <!-- /form-group-->
+
+              <div class="form-group">
+                <label for="productName" class="col-sm-3 control-label">Product Name: </label>
+                <label class="col-sm-1 control-label">: </label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="productName" placeholder="Product Name" name="productName" autocomplete="off">
+                </div>
+              </div> <!-- /form-group-->
+
+              <div class="form-group">
+                <label for="quantity" class="col-sm-3 control-label">Quantity: </label>
+                <label class="col-sm-1 control-label">: </label>
+                <div class="col-sm-8">
+                  <input type="Number" class="form-control" min="0" id="quantity" placeholder="Quantity" name="quantity" autocomplete="off">
+                </div>
+              </div> <!-- /form-group-->
+
+              <div class="form-group">
+                <label for="rate" class="col-sm-3 control-label">Rate: </label>
+                <label class="col-sm-1 control-label">: </label>
+                <div class="col-sm-8">
+                  <input type="Number" min="0" class="form-control" id="rate" placeholder="Rate" name="rate" autocomplete="off">
+                </div>
+              </div> <!-- /form-group-->
+
+              <div class="form-group">
+                <label for="brandName" class="col-sm-3 control-label">Brand Name: </label>
+                <label class="col-sm-1 control-label">: </label>
+                <div class="col-sm-8">
+                  <select class="form-control" id="brandName" name="brandName">
+                    <option value="">~~SELECT~~</option>
+                    <option value="1">Safar</option><option value="2">Safetrack</option><option value="3">Automobile</option><option value="4">Hero</option>				      </select>
+                </div>
+              </div> <!-- /form-group-->
+
+              <div class="form-group">
+                <label for="categoryName" class="col-sm-3 control-label">Category Name: </label>
+                <label class="col-sm-1 control-label">: </label>
+                <div class="col-sm-8">
+                  <select type="text" class="form-control" id="categoryName" placeholder="Product Name" name="categoryName">
+                    <option value="">~~SELECT~~</option>
+                    <option value="1">Automobile</option><option value="2">Hero</option>				      </select>
+                </div>
+              </div> <!-- /form-group-->
+
+              <div class="form-group">
+                <label for="productStatus" class="col-sm-3 control-label">Status: </label>
+                <label class="col-sm-1 control-label">: </label>
+                <div class="col-sm-8">
+                  <select class="form-control" id="productStatus" name="productStatus">
+                    <option value="">~~SELECT~~</option>
+                    <option value="1">Available</option>
+                    <option value="2">Not Available</option>
+                  </select>
+                </div>
+              </div> <!-- /form-group-->
+            </div> <!-- /modal-body -->
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+
+              <button type="submit" class="btn btn-primary" id="createProductBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+            </div> <!-- /modal-footer -->
+           </form> <!-- /.form -->
+        </div> <!-- /modal-content -->
+      </div> <!-- /modal-dailog -->
+    </div>
+    <!-- /add categories -->
+
+
+    <!-- edit categories brand -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Product</h4>
+            </div>
+            <div class="modal-body" style="max-height:450px; overflow:auto;">
+
+              <div class="div-loading">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+              </div>
+
+              <div class="div-result">
+
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="http://localhost/stock/product.php#photo" aria-controls="home" role="tab" data-toggle="tab">Photo</a></li>
+                <li role="presentation"><a href="http://localhost/stock/product.php#productInfo" aria-controls="profile" role="tab" data-toggle="tab">Product Info</a></li>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+
+
+                <div role="tabpanel" class="tab-pane active" id="photo">
+                  <form action="http://localhost/stock/php_action/editProductImage.php" method="POST" id="updateProductImageForm" class="form-horizontal" enctype="multipart/form-data">
+
+                  <br>
+                  <div id="edit-productPhoto-messages"></div>
+
+                  <div class="form-group">
+                    <label for="editProductImage" class="col-sm-3 control-label">Product Image: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <img src="http://localhost/stock/product.php" id="getProductImage" class="thumbnail" style="width:250px; height:250px;">
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="form-group">
+                    <label for="editProductImage" class="col-sm-3 control-label">Select Photo: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <!-- the avatar markup -->
+                      <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>
+                      <div class="kv-avatar center-block">
+                          <input type="file" class="form-control" id="editProductImage" placeholder="Product Name" name="editProductImage" style="width:auto;">
+                      </div>
+
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="modal-footer editProductPhotoFooter">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+
+                    <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button> -->
+                  </div>
+                  <!-- /modal-footer -->
+                  </form>
+                  <!-- /form -->
+                </div>
+                <!-- product image -->
+                <div role="tabpanel" class="tab-pane" id="productInfo">
+                  <form class="form-horizontal" id="editProductForm" action="http://localhost/stock/php_action/editProduct.php" method="POST">
+                  <br>
+
+                  <div id="edit-product-messages"></div>
+
+                  <div class="form-group">
+                    <label for="editProductName" class="col-sm-3 control-label">Product Name: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="editProductName" placeholder="Product Name" name="editProductName" autocomplete="off">
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="form-group">
+                    <label for="editQuantity" class="col-sm-3 control-label">Quantity: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <input type="Number" min="0" class="form-control" id="editQuantity" placeholder="Quantity" name="editQuantity" autocomplete="off">
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="form-group">
+                    <label for="editRate" class="col-sm-3 control-label">Rate: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <input type="Number" min="0" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="form-group">
+                    <label for="editBrandName" class="col-sm-3 control-label">Brand Name: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <select class="form-control" id="editBrandName" name="editBrandName">
+                        <option value="">~~SELECT~~</option>
+                        <option value="1">Safar</option><option value="2">Safetrack</option><option value="3">Automobile</option><option value="4">Hero</option>						      </select>
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="form-group">
+                    <label for="editCategoryName" class="col-sm-3 control-label">Category Name: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <select type="text" class="form-control" id="editCategoryName" name="editCategoryName">
+                        <option value="">~~SELECT~~</option>
+                        <option value="1">Automobile</option><option value="2">Hero</option>						      </select>
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="form-group">
+                    <label for="editProductStatus" class="col-sm-3 control-label">Status: </label>
+                    <label class="col-sm-1 control-label">: </label>
+                    <div class="col-sm-8">
+                      <select class="form-control" id="editProductStatus" name="editProductStatus">
+                        <option value="">~~SELECT~~</option>
+                        <option value="1">Available</option>
+                        <option value="2">Not Available</option>
+                      </select>
+                    </div>
+                  </div> <!-- /form-group-->
+
+                  <div class="modal-footer editProductFooter">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+
+                    <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+                  </div> <!-- /modal-footer -->
+                  </form> <!-- /.form -->
+                </div>
+                <!-- /product info -->
+              </div>
+
+            </div>
+
+            </div> <!-- /modal-body -->
+
+
+        </div>
+        <!-- /modal-content -->
+      </div>
+      <!-- /modal-dailog -->
+    </div>
+    <!-- /categories brand -->
+
+    <!-- categories brand -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="removeProductModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Product</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="removeProductMessages"></div>
+
+            <p>Do you really want to remove ?</p>
+          </div>
+          <div class="modal-footer removeProductFooter">
+            <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+            <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- /categories brand -->
+    </div> <!-- container -->
+
