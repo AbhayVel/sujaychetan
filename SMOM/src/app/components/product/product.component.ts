@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'smom-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+   
 })
 export class ProductComponent implements OnInit {
 
@@ -45,24 +46,52 @@ export class ProductComponent implements OnInit {
   ]
   constructor() { }
 
- orderBy=-1;
+
+  filterData(eve: any) {
+     
+    console.log(`I am in filterData =>${eve.target.value }`)
+  }
+
+  getSortIcon(selfColumnName: string,columnName: string, orderBy: number) : string {
+    if (selfColumnName != columnName) {
+      return 'sorting';
+    }
+    if (orderBy == -1) {
+      return 'sorting_asc';
+    }   
+    return 'sorting_desc';
+    
+  }
+
+
+  orderBy = -1;
+  columnName='id'
   //varName: DataType
   sort(columnName: string){
-    this.orderBy=this.orderBy*-1;
-    let orderBy=this.orderBy;
-    if(columnName =='productName'){
-        this.products.sort(function(a,b){
-          return a.productName>b.productName?-1*orderBy: 1*orderBy;
-        })
-    } else if(columnName=='rate'){
-      this.products.sort(function(a,b){
-        return a.rate>b.rate?-1*orderBy: 1*orderBy;
-      })
-    } else if(columnName=='currentQuantity'){
-      this.products.sort(function(a,b){
-        return a.currentQuantity>b.currentQuantity?-1*orderBy: 1*orderBy;
-      })
-    }
+    this.orderBy = this.orderBy * -1;
+    this.columnName = columnName;
+    //let orderBy = this.orderBy;
+
+    this.products.sort((a, b)=> {
+      return a[columnName] > b[columnName] ? -1 * this.orderBy : 1 * this.orderBy;
+    })
+
+    //if(columnName =='productName'){
+    //  this.products.sort((a, b)=> {  //call back function <- where Declare can take variable of tht scope 
+    //    debugger;
+    //   let instanceOrderBy = this.orderBy;
+    //   // let localOrderBy = orderBy;
+    //    return a.productName > b.productName ? -1 * this.orderBy : 1 * this.orderBy;
+    //    })
+    //} else if(columnName=='rate'){
+    //  this.products.sort(function(a,b){
+    //    return a.rate>b.rate?-1*orderBy: 1*orderBy;
+    //  })
+    //} else if(columnName=='currentQuantity'){
+    //  this.products.sort(function(a,b){
+    //    return a.currentQuantity>b.currentQuantity?-1*orderBy: 1*orderBy;
+    //  })
+    //}
   }
 
   ngOnInit(): void {
