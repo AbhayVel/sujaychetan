@@ -39,17 +39,17 @@
               </thead>
               <tbody>
                 <tr role="row" class="odd">
-                  <th><input type="text" (keydown)="filterData($event)" /></th>
-                  <th><input (keypress)="filterData($event)" /></th>
-                  <th><input (keyup)="filterData($event)" /></th>
-                  <th><input (input)="filterData($event)" /></th>
+                  <th><input type="text" (input)="filterData('id',$event)" /></th>
+                  <th><input (input)="filterData('productName',$event)" /></th>
+                  <th><input (input)="filterData('rate',$event)" /></th>
+                  <th><input (input)="filterData('brand',$event)" /></th>
                   <th><input /></th>
                   <th><input /></th>
                   <th><input /></th>
                   <th><input /></th>
                 </tr>
 
-                <tr *ngFor="let p of products" role="row" class="odd">
+                <tr *ngFor="let p of filterObject.rows" role="row" class="odd">
                   <td>
                     {{p.id}}
                     <!--<img class="img-round" src="./Stock Management System_files/1874199910604c8007e0e19.jpg" style="height:30px; width:50px;">-->
