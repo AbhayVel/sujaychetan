@@ -44,12 +44,31 @@ export class ProductComponent implements OnInit {
     }
 
   ]
+
+  filterObject: any = {
+    rows: [],
+    data: []
+  }
+
+
   constructor() { }
 
 
-  filterData(eve: any) {
-     
-    console.log(`I am in filterData =>${eve.target.value }`)
+  filterData(columnName: string, eve: any)  {
+    let value = eve.target.value;
+    let rows = this.filterObject.data;
+    if (value == '') {
+      return;
+    }
+
+    rows = rows.filter((e: any) => {
+      if (value == '') {
+        return true;
+      }
+      return e.id == value;
+    });
+
+    this.filterObject.rows=rows;
   }
 
   getSortIcon(selfColumnName: string,columnName: string, orderBy: number) : string {
@@ -72,7 +91,7 @@ export class ProductComponent implements OnInit {
     this.columnName = columnName;
     //let orderBy = this.orderBy;
 
-    this.products.sort((a, b)=> {
+    this.filterObject.rows.sort((a: any, b: any)=> {
       return a[columnName] > b[columnName] ? -1 * this.orderBy : 1 * this.orderBy;
     })
 
@@ -95,6 +114,8 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filterObject.data = this.products;
+    this.filterObject.rows = this.products;
   }
 
 }
