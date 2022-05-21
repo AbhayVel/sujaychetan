@@ -4,7 +4,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   selector: 'smom-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-   
+
 })
 export class ProductComponent implements OnInit {
 
@@ -16,7 +16,10 @@ export class ProductComponent implements OnInit {
       currentQuantity: 14,
       totalQuantity: 24,
       brand: 'Automobile',
-      category: 'Automobile',
+      category:{
+        id: 1,
+        name: 'Automobile'
+      } ,
       status: 1
     },
     {
@@ -29,7 +32,10 @@ export class ProductComponent implements OnInit {
       currentQuantity: 5,
       totalQuantity: 10,
       brand: 'Automobile',
-      category: 'Automobile',
+      category:{
+        id: 2,
+        name: 'Other'
+      } ,
       status: 1
     },
     {
@@ -39,7 +45,10 @@ export class ProductComponent implements OnInit {
       currentQuantity: 2,
       totalQuantity: 5,
       brand: 'Automobile',
-      category: 'Hero',
+      category:{
+        id: 3,
+        name: 'Hero'
+      } ,
       status: 1
     }
 
@@ -77,9 +86,9 @@ export class ProductComponent implements OnInit {
     }
     if (orderBy == -1) {
       return 'sorting_asc';
-    }   
+    }
     return 'sorting_desc';
-    
+
   }
 
 
@@ -96,7 +105,7 @@ export class ProductComponent implements OnInit {
     })
 
     //if(columnName =='productName'){
-    //  this.products.sort((a, b)=> {  //call back function <- where Declare can take variable of tht scope 
+    //  this.products.sort((a, b)=> {  //call back function <- where Declare can take variable of tht scope
     //    debugger;
     //   let instanceOrderBy = this.orderBy;
     //   // let localOrderBy = orderBy;

@@ -59,7 +59,7 @@
                   <td [innerText]="p.currentQuantity"></td>
                   <td [textContent]="p.totalQuantity">14</td>
                   <td class="sorting_1">Automobile</td>
-                  <td>Automobile</td>
+                  <td [innerHTML]="p.category.name">Automobile</td>
                   <td><label class="label label-success">Available</label></td>
                   <td>
                     <div class="btn-group">
