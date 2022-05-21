@@ -29,10 +29,10 @@
             <table class="table dataTable no-footer" id="manageProductTable" role="grid" aria-describedby="manageProductTable_info" style="width: 1108px;">
               <thead>
                 <tr role="row">
-                  <th (click)="sort('id')" style="width: 75px;" class="{{getSortIcon('id',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Photo: activate to sort column ascending">Id</th>
-                  <th (click)="sort('productName')"  class="{{getSortIcon('productName',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Product Name: activate to sort column ascending" style="width: 218px;">Product Name</th>
-                  <th (click)="sort('rate')" class="{{getSortIcon('rate',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Rate: activate to sort column ascending" style="width: 30px;">Rate</th>
-                  <th (click)="sort('currentQuantity')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Current Quantity(Stock): activate to sort column ascending" style="width: 93px;">Current Quantity<br>(Stock)</th>
+                  <th (click)="sort('id','num')" style="width: 75px;" class="{{getSortIcon('id',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Photo: activate to sort column ascending">Id</th>
+                  <th (click)="sort('productName','ci')"  class="{{getSortIcon('productName',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Product Name: activate to sort column ascending" style="width: 218px;">Product Name</th>
+                  <th (click)="sort('rate','num')" class="{{getSortIcon('rate',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Rate: activate to sort column ascending" style="width: 30px;">Rate</th>
+                  <th (click)="sort('currentQuantity','num')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Current Quantity(Stock): activate to sort column ascending" style="width: 93px;">Current Quantity<br>(Stock)</th>
                   <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Total Quantity (Stock): activate to sort column ascending" style="width: 81px;">Total Quantity <br>(Stock)</th>
                   <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Brand: activate to sort column descending" style="width: 54px;" aria-sort="ascending">Brand</th><th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 61px;">Category</th>
                   <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 43px;">Status</th><th style="width: 130px;" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Options: activate to sort column ascending">Options</th></tr>
@@ -42,7 +42,11 @@
                   <th><input type="text" (input)="filterData('id',$event)" /></th>
                   <th><input (input)="filterData('productName',$event)" /></th>
                   <th><input (input)="filterData('rate',$event)" /></th>
-                  <th><input (input)="filterData('brand',$event)" /></th>
+                  <th>
+                    <input style="width: 40px" (blur)="filterData('currentQuantityGte',$event)" />
+
+                    <input style="width: 40px" (blur)="filterData('currentQuantityLte',$event)" />
+                  </th>
                   <th><input /></th>
                   <th><input /></th>
                   <th><input /></th>
