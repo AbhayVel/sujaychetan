@@ -8,6 +8,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { ProductComponent } from './components/product/product.component';
 import { CategoryComponent } from './components/category/category.component';
 import { Router, RouterModule } from '@angular/router';
+import { ShowpercentPipe } from './pipes/showpercent.pipe';
+import { CategoryMasterPipe } from './pipes/category-master.pipe';
+import { StatusMasterPipe } from './pipes/status-master.pipe';
+import { SortpipePipe } from './pipes/sortpipe.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,11 @@ import { Router, RouterModule } from '@angular/router';
     FirstComponent,
     HeaderComponent,
     ProductComponent,
-    CategoryComponent
+    CategoryComponent,
+    ShowpercentPipe,
+    CategoryMasterPipe,
+    StatusMasterPipe,
+    SortpipePipe
   ],
   imports: [
     BrowserModule,

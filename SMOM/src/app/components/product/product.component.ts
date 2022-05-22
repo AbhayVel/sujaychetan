@@ -17,25 +17,24 @@ export class ProductComponent implements OnInit {
       currentQuantity: 14,
       totalQuantity: 24,
       brand: 'Automobile',
+      categoryId: 1,
       category:{
         id: 1,
         name: 'Automobile'
       } ,
-      status: 1
+      status: 2
     },
     {
       id: 2,
-      productName: `<b>Horn -
-
-
-      Small</b>`,
+      productName: `Horn - Small`,
       rate: 200,
       currentQuantity: 5,
       totalQuantity: 10,
       brand: 'Automobile',
+      categoryId: 2,
       category:{
-        id: 2,
-        name: 'Other'
+        id: 1,
+        name: 'Automobile'
       } ,
       status: 1
     },
@@ -46,6 +45,7 @@ export class ProductComponent implements OnInit {
       currentQuantity: 2,
       totalQuantity: 5,
       brand: 'Automobile',
+      categoryId: 3,
       category:{
         id: 3,
         name: 'Hero'

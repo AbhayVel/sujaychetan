@@ -58,13 +58,13 @@
                     {{p.id}}
                     <!--<img class="img-round" src="./Stock Management System_files/1874199910604c8007e0e19.jpg" style="height:30px; width:50px;">-->
                   </td>
-                  <td [textContent]="p.productName"></td>
-                  <td [innerHTML]="p.rate"></td>
+                  <td [textContent]="p.productName | uppercase"></td>
+                  <td [innerHTML]="p.rate | showpercent"></td>
                   <td [innerText]="p.currentQuantity"></td>
                   <td [textContent]="p.totalQuantity">14</td>
                   <td class="sorting_1">Automobile</td>
-                  <td [innerHTML]="p.category.name">Automobile</td>
-                  <td><label class="label label-success">Available</label></td>
+                  <td [innerHTML]="p.categoryId | categoryMaster">Automobile</td>
+                  <td [innerHTML]="p.status | statusMaster"></td>
                   <td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,7 +72,6 @@
                       </button>
                       <ul class="dropdown-menu">
                         <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct(255)"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-
                       </ul>
                     </div>
                   </td>
