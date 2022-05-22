@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { filter, sorts } from 'src/app/utilities/utility';
 
 @Component({
   selector: 'smom-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-   
+
 })
 export class ProductComponent implements OnInit {
 
@@ -16,20 +17,25 @@ export class ProductComponent implements OnInit {
       currentQuantity: 14,
       totalQuantity: 24,
       brand: 'Automobile',
-      category: 'Automobile',
-      status: 1
+      categoryId: 1,
+      category:{
+        id: 1,
+        name: 'Automobile'
+      } ,
+      status: 2
     },
     {
       id: 2,
-      productName: `<b>Horn -
-
-
-      Small</b>`,
+      productName: `Horn - Small`,
       rate: 200,
       currentQuantity: 5,
       totalQuantity: 10,
       brand: 'Automobile',
-      category: 'Automobile',
+      categoryId: 2,
+      category:{
+        id: 1,
+        name: 'Automobile'
+      } ,
       status: 1
     },
     {
@@ -39,7 +45,11 @@ export class ProductComponent implements OnInit {
       currentQuantity: 2,
       totalQuantity: 5,
       brand: 'Automobile',
-      category: 'Hero',
+      categoryId: 3,
+      category:{
+        id: 3,
+        name: 'Hero'
+      } ,
       status: 1
     }
 
@@ -47,7 +57,34 @@ export class ProductComponent implements OnInit {
 
   filterObject: any = {
     rows: [],
-    data: []
+    data: [],
+    filter: {
+      id: {
+      columnName : 'id',
+      type: 'num',
+      value:''
+      },
+      productName: {
+        columnName : 'productName',
+        type: 'cs',
+        value:''
+        },
+        rate: {
+          columnName : 'rate',
+          type: 'num',
+          value:''
+          },
+          currentQuantityGte:{
+            columnName : 'currentQuantity',
+            type: 'numGte',
+            value:''
+          },
+          currentQuantityLte:{
+            columnName : 'currentQuantity',
+            type: 'numLte',
+            value:''
+          }
+    }
   }
 
 
@@ -56,18 +93,9 @@ export class ProductComponent implements OnInit {
 
   filterData(columnName: string, eve: any)  {
     let value = eve.target.value;
-    let rows = this.filterObject.data;
-    if (value == '') {
-      return;
-    }
-
-    rows = rows.filter((e: any) => {
-      if (value == '') {
-        return true;
-      }
-      return e.id == value;
-    });
-
+    this.filterObject.filter[columnName].value=value;
+    let rows = filter(this.filterObject);
+    rows= sorts(rows,this.columnName,this.orderBy);
     this.filterObject.rows=rows;
   }
 
@@ -77,40 +105,21 @@ export class ProductComponent implements OnInit {
     }
     if (orderBy == -1) {
       return 'sorting_asc';
-    }   
+    }
     return 'sorting_desc';
-    
+
   }
 
 
   orderBy = -1;
   columnName='id'
   //varName: DataType
-  sort(columnName: string){
+  sort(columnName: string,sortType: string){
     this.orderBy = this.orderBy * -1;
     this.columnName = columnName;
-    //let orderBy = this.orderBy;
-
-    this.filterObject.rows.sort((a: any, b: any)=> {
-      return a[columnName] > b[columnName] ? -1 * this.orderBy : 1 * this.orderBy;
-    })
-
-    //if(columnName =='productName'){
-    //  this.products.sort((a, b)=> {  //call back function <- where Declare can take variable of tht scope 
-    //    debugger;
-    //   let instanceOrderBy = this.orderBy;
-    //   // let localOrderBy = orderBy;
-    //    return a.productName > b.productName ? -1 * this.orderBy : 1 * this.orderBy;
-    //    })
-    //} else if(columnName=='rate'){
-    //  this.products.sort(function(a,b){
-    //    return a.rate>b.rate?-1*orderBy: 1*orderBy;
-    //  })
-    //} else if(columnName=='currentQuantity'){
-    //  this.products.sort(function(a,b){
-    //    return a.currentQuantity>b.currentQuantity?-1*orderBy: 1*orderBy;
-    //  })
-    //}
+    let rows =this.filterObject.rows;
+    rows= sorts(rows,this.columnName,this.orderBy,sortType);
+    this.filterObject.rows=rows;
   }
 
   ngOnInit(): void {
