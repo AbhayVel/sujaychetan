@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { filter, sorts } from 'src/app/utilities/utility';
+import { SortModel } from '../../models/sort-model';
 
 @Component({
   selector: 'smom-product',
@@ -95,7 +96,7 @@ export class ProductComponent implements OnInit {
     let value = eve.target.value;
     this.filterObject.filter[columnName].value=value;
     let rows = filter(this.filterObject);
-    rows= sorts(rows,this.columnName,this.orderBy);
+    rows = sorts(rows, this.sortObj.columnName, this.sortObj.orderBy);
     this.filterObject.rows=rows;
   }
 
@@ -110,16 +111,23 @@ export class ProductComponent implements OnInit {
 
   }
 
+  sortObj: SortModel={
+    orderBy : -1,
+    columnName:'id',  
+    sortType : 'num'
+}
 
-  orderBy = -1;
-  columnName='id'
-  //varName: DataType
+  //orderBy = -1;
+  //columnName='id'
+  ////varName: DataType
+  //sortType='num'
   sort(columnName: string,sortType: string){
-    this.orderBy = this.orderBy * -1;
-    this.columnName = columnName;
-    let rows =this.filterObject.rows;
-    rows= sorts(rows,this.columnName,this.orderBy,sortType);
-    this.filterObject.rows=rows;
+    this.sortObj.orderBy = this.sortObj.orderBy * -1;
+    this.sortObj.columnName = columnName;
+    this.sortObj.sortType = sortType;
+    //let rows =this.filterObject.rows;
+    //rows= sorts(rows,this.columnName,this.orderBy,sortType);
+    //this.filterObject.rows=rows;
   }
 
   ngOnInit(): void {
