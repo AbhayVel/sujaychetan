@@ -1,0 +1,29 @@
+
+
+<table>
+  
+  <thead>
+    <tr>
+      <th (click)="sort('id')">ID</th>
+      <th (click)="sort('name')">Name</th>
+      <th (click)="sort('age')">Age</th>
+    </tr>
+
+    <tr>
+      <th > <input type="text" (input)="filters('id','num',$event)"  /> </th>
+      <th > <input type="text" (input)="filters('name','ci',$event)" /> </th>
+      <th>
+        <input type="text" (input)="filters('ageGte','num',$event)" />
+        <input type="text" (input)="filters('ageLte','num',$event)" />
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of fiterData.rows">
+      <td>{{u.id}}</td>
+      <td  [innerHTML]="u.name">Abhay</td>
+      <td [textContent]="u.age">23</td>
+    </tr>
+ 
+  </tbody>
+</table>
