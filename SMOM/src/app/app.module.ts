@@ -12,6 +12,7 @@ import { ShowpercentPipe } from './pipes/showpercent.pipe';
 import { CategoryMasterPipe } from './pipes/category-master.pipe';
 import { StatusMasterPipe } from './pipes/status-master.pipe';
 import { SortpipePipe } from './pipes/sortpipe.pipe';
+import { ConcatPipe } from './pipes/concat.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SortpipePipe } from './pipes/sortpipe.pipe';
     ShowpercentPipe,
     CategoryMasterPipe,
     StatusMasterPipe,
-    SortpipePipe
+    SortpipePipe,
+    ConcatPipe
   ],
   imports: [
     BrowserModule,

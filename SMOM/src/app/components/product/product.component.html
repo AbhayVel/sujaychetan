@@ -29,9 +29,9 @@
             <table class="table dataTable no-footer" id="manageProductTable" role="grid" aria-describedby="manageProductTable_info" style="width: 1108px;">
               <thead>
                 <tr role="row">
-                  <th (click)="sort('id','num')" style="width: 75px;" class="{{getSortIcon('id',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Photo: activate to sort column ascending">Id</th>
-                  <th (click)="sort('productName','ci')"  class="{{getSortIcon('productName',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Product Name: activate to sort column ascending" style="width: 218px;">Product Name</th>
-                  <th (click)="sort('rate','num')" class="{{getSortIcon('rate',columnName,orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Rate: activate to sort column ascending" style="width: 30px;">Rate</th>
+                  <th (click)="sort('id','num')" style="width: 75px;" class="{{getSortIcon('id',sortObj.columnName,sortObj.orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Photo: activate to sort column ascending">Id</th>
+                  <th (click)="sort('productName','ci')"  class="{{getSortIcon('productName',sortObj.columnName,sortObj.orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Product Name: activate to sort column ascending" style="width: 218px;">Product Name</th>
+                  <th (click)="sort('rate','num')" class="{{getSortIcon('rate',sortObj.columnName,sortObj.orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Rate: activate to sort column ascending" style="width: 30px;">Rate</th>
                   <th (click)="sort('currentQuantity','num')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Current Quantity(Stock): activate to sort column ascending" style="width: 93px;">Current Quantity<br>(Stock)</th>
                   <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Total Quantity (Stock): activate to sort column ascending" style="width: 81px;">Total Quantity <br>(Stock)</th>
                   <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Brand: activate to sort column descending" style="width: 54px;" aria-sort="ascending">Brand</th><th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 61px;">Category</th>
@@ -53,9 +53,9 @@
                   <th><input /></th>
                 </tr>
 
-                <tr *ngFor="let p of filterObject.rows" role="row" class="odd">
+                <tr *ngFor="let p of filterObject.rows | sortpipe:sortObj" role="row" class="odd">
                   <td>
-                    {{p.id}}
+                    {{p.id | concat:p.productName:p.rate}}
                     <!--<img class="img-round" src="./Stock Management System_files/1874199910604c8007e0e19.jpg" style="height:30px; width:50px;">-->
                   </td>
                   <td [textContent]="p.productName | uppercase"></td>
