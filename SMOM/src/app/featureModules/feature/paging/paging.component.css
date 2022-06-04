@@ -1,0 +1,12 @@
+.paginate_button {
+  margin-left: 10px;
+  width: 30px;
+  display: inline-block;
+  align-content: center;
+  cursor: pointer;
+}
+
+.current {
+  background-color: blue;
+  color: white;
+}

@@ -19,67 +19,69 @@
               <button class="btn btn-default button1" data-toggle="modal" id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Product </button>
             </div> <!-- /div-action -->
 
-            <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;"><a class="btn btn-default button1" id="viewProductModalBtn" type="button" href="http://localhost/stock/productview.php" target="_blank"> View Total Stock </a>
+            <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;">
+              <a class="btn btn-default button1" id="viewProductModalBtn" type="button" href="http://localhost/stock/productview.php" target="_blank"> View Total Stock </a>
 
             </div> <!-- /div-action -->
 
-            <div id="manageProductTable_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="manageProductTable_length"><label>Show <select name="manageProductTable_length" aria-controls="manageProductTable" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="manageProductTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="manageProductTable"></label></div>
-
-            {{products | json}}
-            <table class="table dataTable no-footer" id="manageProductTable" role="grid" aria-describedby="manageProductTable_info" style="width: 1108px;">
-              <thead>
-                <tr role="row">
-                  <th (click)="sort('id','num')" style="width: 75px;" class="{{getSortIcon('id',sortObj.columnName,sortObj.orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Photo: activate to sort column ascending">Id</th>
-                  <th (click)="sort('productName','ci')"  class="{{getSortIcon('productName',sortObj.columnName,sortObj.orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Product Name: activate to sort column ascending" style="width: 218px;">Product Name</th>
-                  <th (click)="sort('rate','num')" class="{{getSortIcon('rate',sortObj.columnName,sortObj.orderBy)}}" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Rate: activate to sort column ascending" style="width: 30px;">Rate</th>
-                  <th (click)="sort('currentQuantity','num')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Current Quantity(Stock): activate to sort column ascending" style="width: 93px;">Current Quantity<br>(Stock)</th>
-                  <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Total Quantity (Stock): activate to sort column ascending" style="width: 81px;">Total Quantity <br>(Stock)</th>
-                  <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Brand: activate to sort column descending" style="width: 54px;" aria-sort="ascending">Brand</th><th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 61px;">Category</th>
-                  <th class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 43px;">Status</th><th style="width: 130px;" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1" colspan="1" aria-label="Options: activate to sort column ascending">Options</th></tr>
-              </thead>
-              <tbody>
-                <tr role="row" class="odd">
-                  <th><input type="text" (input)="filterData('id',$event)" /></th>
-                  <th><input (input)="filterData('productName',$event)" /></th>
-                  <th><input (input)="filterData('rate',$event)" /></th>
-                  <th>
-                    <input style="width: 40px" (blur)="filterData('currentQuantityGte',$event)" />
-
-                    <input style="width: 40px" (blur)="filterData('currentQuantityLte',$event)" />
-                  </th>
-                  <th><input /></th>
-                  <th><input /></th>
-                  <th><input /></th>
-                  <th><input /></th>
-                </tr>
-
-                <tr *ngFor="let p of filterObject.rows | sortpipe:sortObj" role="row" class="odd">
-                  <td>
-                    {{p.id | concat:p.productName:p.rate}}
-                    <!--<img class="img-round" src="./Stock Management System_files/1874199910604c8007e0e19.jpg" style="height:30px; width:50px;">-->
-                  </td>
-                  <td [textContent]="p.productName | uppercase"></td>
-                  <td [innerHTML]="p.rate | showpercent"></td>
-                  <td [innerText]="p.currentQuantity"></td>
-                  <td [textContent]="p.totalQuantity">14</td>
-                  <td class="sorting_1">Automobile</td>
-                  <td [innerHTML]="p.categoryId | categoryMaster">Automobile</td>
-                  <td [innerHTML]="p.status | statusMaster"></td>
-                  <td>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Action <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct(255)"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
+            <div id="manageProductTable_wrapper" class="dataTables_wrapper no-footer">
+              <div class="dataTables_length" id="manageProductTable_length"><label>Show <select name="manageProductTable_length" aria-controls="manageProductTable" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="manageProductTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="manageProductTable"></label></div>
 
 
+              <table class="table dataTable no-footer" id="manageProductTable" role="grid" aria-describedby="manageProductTable_info" style="width: 1108px;">
+                <thead>
+                  <tr role="row">
+                    <th *ngFor="let c of columnDef">
+                      <div *ngIf="c.isSorting" class="{{getSortIcon(c.columnName,sortObj.columnName,sortObj.orderBy)}}" (click)="sort(c.columnName,c.type)">{{c.displayText}} </div>
+                      <div *ngIf="!c.isSorting" >{{c.displayText}} </div>
+                    </th>
+                 </tr>
+                </thead>
+                <tbody>
+                  <tr role="row" class="odd">
+                    <th><input type="text" (input)="filterData('id',$event)" /></th>
+                    <th><input (input)="filterData('productName',$event)" /></th>
+                    <th><input (input)="filterData('rate',$event)" /></th>
+                    <th>
+                      <input style="width: 40px" (blur)="filterData('currentQuantityGte',$event)" />
 
-              </tbody></table><div class="dataTables_info" id="manageProductTable_info" role="status" aria-live="polite">Showing 1 to 10 of 286 entries</div><div class="dataTables_paginate paging_simple_numbers" id="manageProductTable_paginate"><a class="paginate_button previous disabled" aria-controls="manageProductTable" data-dt-idx="0" tabindex="0" id="manageProductTable_previous">Previous</a><span><a class="paginate_button current" aria-controls="manageProductTable" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="5" tabindex="0">5</a><span class="ellipsis">…</span><a class="paginate_button " aria-controls="manageProductTable" data-dt-idx="6" tabindex="0">29</a></span><a class="paginate_button next" aria-controls="manageProductTable" data-dt-idx="7" tabindex="0" id="manageProductTable_next">Next</a></div></div>
+                      <input style="width: 40px" (blur)="filterData('currentQuantityLte',$event)" />
+                    </th>
+                    <th><input /></th>
+                    <th><input /></th>
+                    <th><input /></th>
+                    <th><input /></th>
+                  </tr>
+
+                  <tr *ngFor="let p of filterObject.rows | sortpipe:sortObj" role="row" class="odd">
+                    <td *ngFor="let c2 of columnDef">
+                      {{p[c2.columnName]}}
+                      <!--<img class="img-round" src="./Stock Management System_files/1874199910604c8007e0e19.jpg" style="height:30px; width:50px;">-->
+                    </td>
+                    <td [textContent]="p.productName | uppercase"></td>
+                    <td [innerHTML]="p.rate | showpercent"></td>
+                    <td [innerText]="p.currentQuantity"></td>
+                    <td [textContent]="p.totalQuantity">14</td>
+                    <td class="sorting_1">Automobile</td>
+                    <td [innerHTML]="p.categoryId | categoryMaster">Automobile</td>
+                    <td [innerHTML]="p.status | statusMaster"></td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct(255)"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <smom-paging [config]="filterObject" (pagingEvent)="pageChange($event)"></smom-paging>
+            </div>
+
+         
             <!-- /table -->
 
           </div> <!-- /panel-body -->

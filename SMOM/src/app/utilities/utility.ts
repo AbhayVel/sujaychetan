@@ -37,3 +37,26 @@ export function filter(filterConfig: any){
   }
   return rows;
 }
+
+
+export function getGridPaging(filterObject: any, sortObj: any) {
+ 
+  let rows = filter(filterObject);
+  rows = sorts(rows, sortObj.columnName, sortObj.orderBy);
+  let totalRows = rows.length;
+  let totalPages = Math.ceil(rows.length / filterObject.rowsPerPage);
+  if (filterObject.currentPage > totalPages) {
+    filterObject.currentPage = 1;
+  }
+  let startIndex = (filterObject.currentPage - 1) * filterObject.rowsPerPage;
+  rows = rows.slice(startIndex, startIndex + filterObject.rowsPerPage);
+  let pages = [];
+  for (let i = 1; i <= totalPages; i = i + 1) {
+    pages.push(i);
+  }
+  filterObject.pages = pages;
+  filterObject.rows = rows;
+  filterObject.startRow = startIndex + 1
+  filterObject.endRow = startIndex + filterObject.rows.length
+  filterObject.totalRows = totalRows;
+}
