@@ -13,6 +13,8 @@ import { CategoryMasterPipe } from './pipes/category-master.pipe';
 import { StatusMasterPipe } from './pipes/status-master.pipe';
 import { SortpipePipe } from './pipes/sortpipe.pipe';
 import { ConcatPipe } from './pipes/concat.pipe';
+import { FeatureModule } from './featureModules/feature/feature.module';
+import { PagingComponent } from './featureModules/feature/paging/paging.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ConcatPipe } from './pipes/concat.pipe';
       {path: '' , component: ProductComponent }  ,
       {path: 'product' , component: ProductComponent }  ,  
       {path: 'category' , component: CategoryComponent }  ,  
-    ])
+    ]),
+    FeatureModule
   ],
   providers: [],
   bootstrap: [AppComponent]

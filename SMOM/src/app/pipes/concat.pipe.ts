@@ -9,7 +9,7 @@ export class ConcatPipe implements PipeTransform {
     let result = value;
 
     for (let i = 0; i < add.length; i = i + 1) {
-      result = `${result}-${add[i]}`;
+      result = `${result}-${add[i]}  4`;
     }
 
     return result;
