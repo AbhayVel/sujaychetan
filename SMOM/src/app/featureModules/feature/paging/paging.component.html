@@ -1,0 +1,18 @@
+<div class="dataTables_info" id="manageProductTable_info" role="status" aria-live="polite">
+  Showing {{pagingObject?.startRow}} to {{pagingObject?.endRow}} of {{
+pagingObject?.totalRows
+  }} entries
+</div>
+<div class="dataTables_paginate paging_simple_numbers" id="manageProductTable_paginate">
+  <a class="paginate_button previous " [class.disabled]="pagingObject?.currentPage==1" (click)="pageChange(pagingObject.currentPage-1)" aria-controls="manageProductTable" data-dt-idx="0" tabindex="0" id="manageProductTable_previous">Previous</a>
+  <span>
+    <a *ngFor="let p of pagingObject?.pages" class="paginate_button" [class.current]="p==pagingObject.currentPage" (click)="pageChange(p)" aria-controls="manageProductTable" data-dt-idx="1" tabindex="0">
+      {{
+p
+      }}
+    </a>
+
+
+  </span>
+  <a class="paginate_button next disabled" [class.disabled]="pagingObject?.currentPage==pagingObject?.pages?.length" (click)="pageChange(pagingObject?.currentPage + 1)" aria-controls="manageProductTable" data-dt-idx="7" tabindex="0" id="manageProductTable_next">Next</a>
+</div>
