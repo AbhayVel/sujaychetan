@@ -519,7 +519,17 @@ export class ProductComponent implements OnInit {
             columnName : 'currentQuantity',
             type: 'numLte',
             value:''
-          }
+      },
+      brand: {
+        columnName: 'brand',
+        type: 'cs',
+        value: ''
+      },
+      status: {
+        columnName: 'status',
+        type: 'num',
+        value: ''
+      }
     },
 
     pages: [1, 2, 3, 4, 5, 6],
@@ -527,9 +537,13 @@ export class ProductComponent implements OnInit {
     rowsPerPage: 5,
     startRow: 0,
     endRow: 0,
-    totalRows: 0
-  }
-
+    totalRows: 0,
+    sortObj: {
+      orderBy: -1,
+      columnName: 'id',
+      sortType: 'num'
+    }
+  }  
   columnDef = [
     {
       columnName: "id",
@@ -550,7 +564,8 @@ export class ProductComponent implements OnInit {
       type: 'cs',
       displayText: 'Rate',
       isSorting: true,
-      isFiltering: true
+      isFiltering: false,
+      isCustomFilter: true
     },
     {
       columnName: "currentQuantity",
@@ -564,7 +579,7 @@ export class ProductComponent implements OnInit {
       type: 'cs',
       displayText: 'totalQuantity',
       isSorting: true,
-      isFiltering: true
+      isFiltering: false
     },
     {
       columnName: "brand",
@@ -585,65 +600,36 @@ export class ProductComponent implements OnInit {
       type: 'cs',
       displayText: 'Status',
       isSorting: true,
-      isFiltering: true
+      isFiltering: false,
+      isCustomFilter: true
     },
     {
       columnName: "action",
       type: 'cs',
       displayText: 'Action',
+      isCustomData: true,
       isSorting: false,
-      isFiltering: false
+      isFiltering: false,
+     
     },
   ]
 
+  edit(data: any, a: any, b: any) {
+    debugger;
+  }
   constructor() { }
 
-  pageChange(p: number) {
-    if (p < 1 || p > this.filterObject.pages.length) {
-      return;
-    }
-    this.filterObject.currentPage = p;
-    getGridPaging(this.filterObject, this.sortObj);
+ 
+  filterData($event: any, column: any, fun : any) {
+    let value = $event.target.value;
+    debugger;
+    fun(column,value)
   }
-  filterData(columnName: string, eve: any)  {
-    let value = eve.target.value;
-    this.filterObject.filter[columnName].value=value;
-    this.pageChange(this.filterObject.currentPage);
-
-  }
-
-  getSortIcon(selfColumnName: string,columnName: string, orderBy: number) : string {
-    if (selfColumnName != columnName) {
-      return 'sorting';
-    }
-    if (orderBy == -1) {
-      return 'sorting_asc';
-    }
-    return 'sorting_desc';
-
-  }
-
-  sortObj: SortModel={
-    orderBy : -1,
-    columnName:'id',  
-    sortType : 'num'
-}
-
-  //orderBy = -1;
-  //columnName='id'
-  ////varName: DataType
-  //sortType='num'
-  sort(columnName: string,sortType: string){
-    this.sortObj.orderBy = this.sortObj.orderBy * -1;
-    this.sortObj.columnName = columnName;
-    this.sortObj.sortType = sortType;
-    this.pageChange(this.filterObject.currentPage);
-  }
-
+ 
   ngOnInit(): void {
     this.filterObject.data = this.products;
     this.filterObject.rows = this.products;
-    this.pageChange(1);
+    
   }
 
 }

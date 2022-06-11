@@ -10,7 +10,8 @@ export function sorts(list : Array<any>, columnName: string, orderBy: number, ty
   })
 }
 
-export function filter(filterConfig: any){
+export function filter(filterConfig: any) {
+  debugger;
   let rows = filterConfig.data;
   for(let key in filterConfig.filter){
   let  ftype=filterConfig.filter[key];

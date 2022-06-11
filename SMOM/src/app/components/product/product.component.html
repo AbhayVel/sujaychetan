@@ -24,64 +24,28 @@
 
             </div> <!-- /div-action -->
 
-            <div id="manageProductTable_wrapper" class="dataTables_wrapper no-footer">
-              <div class="dataTables_length" id="manageProductTable_length"><label>Show <select name="manageProductTable_length" aria-controls="manageProductTable" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="manageProductTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="manageProductTable"></label></div>
+            <smom-table [columnDef]="columnDef" [filterObject]="filterObject">
+
+              <ng-template smomFilter name="status" let-fun="filter">
+                <select (change)="filterData($event,'status', fun)">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </ng-template>
+
+              <ng-template smomFilter name="rate">
+                <input type="checkbox" />
+              </ng-template>
+
+              <ng-template smomAction name="action" let-data="row"  let-coldef="coldef"  let-random="dummy">
+                <button type="button"  (click)="edit(data,coldef, random)">View </button>
+                <button type="button">Edit </button>
+                <button type="button">Delete </button>
+              </ng-template>
+
+            </smom-table>
 
 
-              <table class="table dataTable no-footer" id="manageProductTable" role="grid" aria-describedby="manageProductTable_info" style="width: 1108px;">
-                <thead>
-                  <tr role="row">
-                    <th *ngFor="let c of columnDef">
-                      <div *ngIf="c.isSorting" class="{{getSortIcon(c.columnName,sortObj.columnName,sortObj.orderBy)}}" (click)="sort(c.columnName,c.type)">{{c.displayText}} </div>
-                      <div *ngIf="!c.isSorting" >{{c.displayText}} </div>
-                    </th>
-                 </tr>
-                </thead>
-                <tbody>
-                  <tr role="row" class="odd">
-                    <th><input type="text" (input)="filterData('id',$event)" /></th>
-                    <th><input (input)="filterData('productName',$event)" /></th>
-                    <th><input (input)="filterData('rate',$event)" /></th>
-                    <th>
-                      <input style="width: 40px" (blur)="filterData('currentQuantityGte',$event)" />
-
-                      <input style="width: 40px" (blur)="filterData('currentQuantityLte',$event)" />
-                    </th>
-                    <th><input /></th>
-                    <th><input /></th>
-                    <th><input /></th>
-                    <th><input /></th>
-                  </tr>
-
-                  <tr *ngFor="let p of filterObject.rows | sortpipe:sortObj" role="row" class="odd">
-                    <td *ngFor="let c2 of columnDef">
-                      {{p[c2.columnName]}}
-                      <!--<img class="img-round" src="./Stock Management System_files/1874199910604c8007e0e19.jpg" style="height:30px; width:50px;">-->
-                    </td>
-                    <td [textContent]="p.productName | uppercase"></td>
-                    <td [innerHTML]="p.rate | showpercent"></td>
-                    <td [innerText]="p.currentQuantity"></td>
-                    <td [textContent]="p.totalQuantity">14</td>
-                    <td class="sorting_1">Automobile</td>
-                    <td [innerHTML]="p.categoryId | categoryMaster">Automobile</td>
-                    <td [innerHTML]="p.status | statusMaster"></td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Action <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct(255)"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <smom-paging [config]="filterObject" (pagingEvent)="pageChange($event)"></smom-paging>
-            </div>
-
-         
             <!-- /table -->
 
           </div> <!-- /panel-body -->
