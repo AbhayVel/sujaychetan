@@ -39,8 +39,10 @@
                 </thead>
                 <tbody>
                   <tr role="row" class="odd">
-                    <th><input type="text" (input)="filterData('id',$event)" /></th>
-                    <th><input (input)="filterData('productName',$event)" /></th>
+                    <th *ngFor="let c of columnDef">
+                    <input type="text" (input)="filterData(c.columnName,$event)" />
+                    </th>
+                    <!--<th><input (input)="filterData('productName',$event)" /></th>
                     <th><input (input)="filterData('rate',$event)" /></th>
                     <th>
                       <input style="width: 40px" (blur)="filterData('currentQuantityGte',$event)" />
@@ -50,7 +52,7 @@
                     <th><input /></th>
                     <th><input /></th>
                     <th><input /></th>
-                    <th><input /></th>
+                    <th><input /></th>-->
                   </tr>
 
                   <tr *ngFor="let p of filterObject.rows | sortpipe:sortObj" role="row" class="odd">
