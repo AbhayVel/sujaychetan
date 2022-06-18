@@ -15,6 +15,7 @@ import { SortpipePipe } from './pipes/sortpipe.pipe';
 import { ConcatPipe } from './pipes/concat.pipe';
 import { FeatureModule } from './featureModules/feature/feature.module';
 import { PagingComponent } from './featureModules/feature/paging/paging.component';
+import { EditProductFormComponent } from './components/edit-product-form/edit-product-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PagingComponent } from './featureModules/feature/paging/paging.componen
     CategoryMasterPipe,
     StatusMasterPipe,
     SortpipePipe,
-    ConcatPipe
+    ConcatPipe,
+    EditProductFormComponent
   ],
   imports: [
     BrowserModule,

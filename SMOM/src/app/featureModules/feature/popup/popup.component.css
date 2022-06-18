@@ -1,0 +1,21 @@
+.show{
+    display: block;
+    
+}
+
+.dialog-hide {
+ 
+ transform: scale(0.01);
+ opacity: 0;
+  transition: 5s;
+}
+
+
+.dialog-show {
+  left: 0px !important;
+  top :0 !important;
+  opacity: 1;
+  transform: rotate(360deg) scale(1);
+
+  transition: 5s;
+}

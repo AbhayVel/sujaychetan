@@ -4,6 +4,7 @@ import { PagingComponent } from './paging/paging.component';
 import { TableComponent } from './table/table.component';
 import { ActionDirective } from './table/action.directive';
 import { FilterDirective } from './table/filter.directive';
+import { PopupComponent } from './popup/popup.component';
  
 
 
@@ -13,12 +14,13 @@ import { FilterDirective } from './table/filter.directive';
     TableComponent,
     ActionDirective,
     FilterDirective,
+    PopupComponent,
     
   ],
   imports: [
     CommonModule
   ],
   exports: [PagingComponent, TableComponent, ActionDirective,
-    FilterDirective,]
+    FilterDirective, PopupComponent]
 })
 export class FeatureModule { }

@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { filter, getGridPaging, sorts } from 'src/app/utilities/utility';
+import { PopupComponent } from '../../featureModules/feature/popup/popup.component';
+import { PopupConfig } from '../../models/popup';
 import { SortModel } from '../../models/sort-model';
 
 @Component({
@@ -613,9 +615,24 @@ export class ProductComponent implements OnInit {
      
     },
   ]
-
+  popupConfig: PopupConfig = {
+    isShow: false,
+    headerName: 'Edit Product'
+  }
+  isOpenPopup = false;
+  product?: any;
   edit(data: any, a: any, b: any) {
-    debugger;
+    this.product = data;
+    this.popupConfig.isShow = true;
+    this.popupConfig = { ...this.popupConfig }
+
+    this.myPopUp?.open(this.popupConfig);
+  }
+
+  @ViewChild('myPopUp') myPopUp?: PopupComponent;
+  close($event: any) {
+     
+    this.isOpenPopup = $event;
   }
   constructor() { }
 
@@ -625,6 +642,10 @@ export class ProductComponent implements OnInit {
     debugger;
     fun(column,value)
   }
+
+ 
+
+   
  
   ngOnInit(): void {
     this.filterObject.data = this.products;
