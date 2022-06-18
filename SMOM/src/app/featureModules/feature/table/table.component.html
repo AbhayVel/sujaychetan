@@ -15,11 +15,11 @@
     <tbody>
       <tr role="row" class="odd">
         <th *ngFor="let c of columnDef">
-          <div *ngIf="c.isCustomFilter">
+          <ng-container *ngIf="c.isCustomFilter">
            <ng-container [ngTemplateOutlet]="filterElements[c.columnName]"
                          [ngTemplateOutletContext]="{filter: filterDataDirect.bind(this), colDef: c}"
                          ></ng-container> 
-          </div>
+          </ng-container>
           <input *ngIf="c.isFiltering" type="text" (input)="filterData(c.columnName,$event)" />
         </th>
         <!--<th><input (input)="filterData('productName',$event)" /></th>
