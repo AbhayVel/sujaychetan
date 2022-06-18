@@ -1,0 +1,100 @@
+<div class="tab-content">
+
+  {{product| json}}
+  <div role="tabpanel" id="productInfo">
+    <form class="form-horizontal" id="editProductForm" action="http://localhost/stock/php_action/editProduct.php" method="POST">
+      <br>
+
+      <div id="edit-product-messages"></div>
+      <div class="form-group">
+        <label for="editProductName" class="col-sm-3 control-label">Id: </label>
+        <label class="col-sm-1 control-label">: </label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" required id="editProductName" displayLabel="Id" (input)="changeData($event)" [value]="product?.id" placeholder="Product Id" name="id" autocomplete="off">
+          <div class="alert alert-danger" *ngIf="errors?.id?.message?.length>0">
+            <span *ngFor="let m of errors?.id?.message">
+              {{m}}
+            </span>
+
+          </div>
+
+          <div class="alert alert-danger" *ngIf="errors?.id?.required">
+             
+             Id is required
+            
+
+          </div>
+
+        </div>
+      </div> <!-- /form-group-->
+      <div class="form-group">
+        <label for="editProductName" class="col-sm-3 control-label">Product Name: </label>
+        <label class="col-sm-1 control-label">: </label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="editProductName" displayLabel="Product Name" (input)="changeData($event)" [value]="product?.productName" placeholder="Product Name" name="productName" autocomplete="off">
+        </div>
+      </div> <!-- /form-group-->
+
+      <div class="form-group">
+        <label for="editQuantity" class="col-sm-3 control-label">Quantity: </label>
+        <label class="col-sm-1 control-label">: </label>
+        <div class="col-sm-8">
+          <input type="Number" min="0" class="form-control" id="editQuantity" placeholder="Quantity" name="editQuantity" autocomplete="off">
+        </div>
+      </div> <!-- /form-group-->
+
+      <div class="form-group">
+        <label for="editRate" class="col-sm-3 control-label">Rate: </label>
+        <label class="col-sm-1 control-label">: </label>
+        <div class="col-sm-8">
+          <input type="Number" min="0" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+        </div>
+      </div> <!-- /form-group-->
+
+      <div class="form-group">
+        <label for="editBrandName" class="col-sm-3 control-label">Brand Name: </label>
+        <label class="col-sm-1 control-label">: </label>
+        <div class="col-sm-8">
+          <select class="form-control" id="editBrandName" name="editBrandName">
+            <option value="">~~SELECT~~</option>
+            <option value="1">Safar</option>
+            <option value="2">Safetrack</option>
+            <option value="3">Automobile</option>
+            <option value="4">Hero</option>
+          </select>
+        </div>
+      </div> <!-- /form-group-->
+
+      <div class="form-group">
+        <label for="editCategoryName" class="col-sm-3 control-label">Category Name: </label>
+        <label class="col-sm-1 control-label">: </label>
+        <div class="col-sm-8">
+          <select type="text" class="form-control" id="editCategoryName" name="editCategoryName">
+            <option value="">~~SELECT~~</option>
+            <option value="1">Automobile</option>
+            <option value="2">Hero</option>
+          </select>
+        </div>
+      </div> <!-- /form-group-->
+
+      <div class="form-group">
+        <label for="editProductStatus" class="col-sm-3 control-label">Status: </label>
+        <label class="col-sm-1 control-label">: </label>
+        <div class="col-sm-8">
+          <select class="form-control" id="editProductStatus" name="editProductStatus">
+            <option value="">~~SELECT~~</option>
+            <option value="1">Available</option>
+            <option value="2">Not Available</option>
+          </select>
+        </div>
+      </div> <!-- /form-group-->
+
+      <div class="modal-footer editProductFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+
+        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+      </div> <!-- /modal-footer -->
+    </form> <!-- /.form -->
+  </div>
+  <!-- /product info -->
+</div>
