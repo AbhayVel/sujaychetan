@@ -10,7 +10,7 @@
         <label for="editProductName" class="col-sm-3 control-label">Id: </label>
         <label class="col-sm-1 control-label">: </label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" required id="editProductName" displayLabel="Id" (input)="changeData($event)" [value]="product?.id" placeholder="Product Id" name="id" autocomplete="off">
+          <input type="text" class="form-control" required id="editProductName" displayLabel="Id" min="3" max="10" qdnModel (input)="changeData($event)" [value]="product?.id" placeholder="Product Id" name="id" autocomplete="off">
           <div class="alert alert-danger" *ngIf="errors?.id?.message?.length>0">
             <span *ngFor="let m of errors?.id?.message">
               {{m}}
@@ -19,9 +19,15 @@
           </div>
 
           <div class="alert alert-danger" *ngIf="errors?.id?.required">
-             
-             Id is required
-            
+
+            Id is required
+
+
+          </div>
+          <div class="alert alert-danger" *ngIf="errors?.id?.min">
+
+           Minimum value is 3.
+
 
           </div>
 
@@ -31,7 +37,14 @@
         <label for="editProductName" class="col-sm-3 control-label">Product Name: </label>
         <label class="col-sm-1 control-label">: </label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="editProductName" displayLabel="Product Name" (input)="changeData($event)" [value]="product?.productName" placeholder="Product Name" name="productName" autocomplete="off">
+          <input type="text" class="form-control" id="editProductName" minLength="7" max-length="30" qdnModel displayLabel="Product Name" (input)="changeData($event)" [value]="product?.productName" placeholder="Product Name" name="productName" autocomplete="off">
+          <div class="alert alert-danger" *ngIf="errors?.productName?.message?.length>0">
+            <span *ngFor="let m of errors?.productName?.message">
+              {{m}}
+            </span>
+
+          </div>
+
         </div>
       </div> <!-- /form-group-->
 
@@ -92,7 +105,7 @@
       <div class="modal-footer editProductFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 
-        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+        <button type="button" class="btn btn-success" (click)="save()" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
       </div> <!-- /modal-footer -->
     </form> <!-- /.form -->
   </div>
