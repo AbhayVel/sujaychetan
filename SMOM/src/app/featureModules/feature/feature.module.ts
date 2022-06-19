@@ -5,6 +5,8 @@ import { TableComponent } from './table/table.component';
 import { ActionDirective } from './table/action.directive';
 import { FilterDirective } from './table/filter.directive';
 import { PopupComponent } from './popup/popup.component';
+import { FormModelDirective } from './form/form-model.directive';
+import { FormDirective } from './form/form.directive';
  
 
 
@@ -15,12 +17,14 @@ import { PopupComponent } from './popup/popup.component';
     ActionDirective,
     FilterDirective,
     PopupComponent,
+    FormModelDirective,
+    FormDirective,
     
   ],
   imports: [
     CommonModule
   ],
   exports: [PagingComponent, TableComponent, ActionDirective,
-    FilterDirective, PopupComponent]
+    FilterDirective, PopupComponent, FormModelDirective, FormDirective]
 })
 export class FeatureModule { }

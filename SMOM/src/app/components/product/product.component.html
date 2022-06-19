@@ -46,7 +46,7 @@
             </smom-table>
 
             <smom-popup  #myPopUp  (colseEvent)="close($event)" >
-              <smom-edit-product-form  [product]="product"></smom-edit-product-form>
+              <smom-edit-product-form *ngIf="isOpenPopup"  [product]="product"></smom-edit-product-form>
 
 
             </smom-popup>

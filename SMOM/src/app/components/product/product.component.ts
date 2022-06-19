@@ -625,7 +625,7 @@ export class ProductComponent implements OnInit {
     this.product = data;
     this.popupConfig.isShow = true;
     this.popupConfig = { ...this.popupConfig }
-
+    this.isOpenPopup = true;
     this.myPopUp?.open(this.popupConfig);
   }
 

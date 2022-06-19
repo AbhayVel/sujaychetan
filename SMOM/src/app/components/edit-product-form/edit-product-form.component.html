@@ -2,7 +2,7 @@
 
   {{product| json}}
   <div role="tabpanel" id="productInfo">
-    <form class="form-horizontal" id="editProductForm" action="http://localhost/stock/php_action/editProduct.php" method="POST">
+    <form class="form-horizontal" #form="smomForm"  smomForm id="editProductForm" action="http://localhost/stock/php_action/editProduct.php" method="POST">
       <br>
 
       <div id="edit-product-messages"></div>
@@ -10,21 +10,21 @@
         <label for="editProductName" class="col-sm-3 control-label">Id: </label>
         <label class="col-sm-1 control-label">: </label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" required id="editProductName" displayLabel="Id" min="3" max="10" qdnModel (input)="changeData($event)" [value]="product?.id" placeholder="Product Id" name="id" autocomplete="off">
-          <div class="alert alert-danger" *ngIf="errors?.id?.message?.length>0">
-            <span *ngFor="let m of errors?.id?.message">
+          <input type="text" class="form-control" [smomFormModel]="product"  #id="formModel" required id="editProductName" displayLabel="Id" min="3" max="10"  [value]="product?.id" placeholder="Product Id" name="id" autocomplete="off">
+          <div class="alert alert-danger" *ngIf="id.errors?.message?.length>0">
+            <span *ngFor="let m of id?.errors?.message">
               {{m}}
             </span>
 
           </div>
 
-          <div class="alert alert-danger" *ngIf="errors?.id?.required">
+          <div class="alert alert-danger" *ngIf="id?.errors?.required">
 
             Id is required
 
 
           </div>
-          <div class="alert alert-danger" *ngIf="errors?.id?.min">
+          <div class="alert alert-danger" *ngIf="id?.errors?.min">
 
            Minimum value is 3.
 
@@ -37,14 +37,20 @@
         <label for="editProductName" class="col-sm-3 control-label">Product Name: </label>
         <label class="col-sm-1 control-label">: </label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="editProductName" minLength="7" max-length="30" qdnModel displayLabel="Product Name" (input)="changeData($event)" [value]="product?.productName" placeholder="Product Name" name="productName" autocomplete="off">
-          <div class="alert alert-danger" *ngIf="errors?.productName?.message?.length>0">
-            <span *ngFor="let m of errors?.productName?.message">
+          <input type="text" class="form-control" id="editProductName" [smomFormModel]="product" #productName="formModel" minLength="7" max-length="30" displayLabel="Product Name" [value]="product?.productName" placeholder="Product Name" name="productName" autocomplete="off">
+          <div class="alert alert-danger" *ngIf="productName?.errors?.message?.length>0">
+            <span *ngFor="let m of productName?.errors?.message">
               {{m}}
             </span>
 
           </div>
 
+          <div class="alert alert-danger" *ngIf="id?.errors?.minLength">
+
+            Minimum value is 3.
+
+
+          </div>
         </div>
       </div> <!-- /form-group-->
 
