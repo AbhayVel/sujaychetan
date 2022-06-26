@@ -12,6 +12,11 @@
             <div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Product</div>
           </div> <!-- /panel-heading -->
           <div class="panel-body">
+          sdsdsdsd
+            <input type="text" #d="dateControl" [value]="dated" smomDate class="form-control" autocomplete="off">
+          <span *ngIf="!d.isValid">
+            Date is in Valid.
+          </span>
 
             <div class="remove-messages"></div>
 
@@ -37,16 +42,16 @@
                 <input type="checkbox" />
               </ng-template>
 
-              <ng-template smomAction name="action" let-data="row"  let-coldef="coldef"  let-random="dummy">
-                <button type="button"  (click)="edit(data,coldef, random)">View </button>
+              <ng-template smomAction name="action" let-data="row" let-coldef="coldef" let-random="dummy">
+                <button type="button" (click)="edit(data,coldef, random)">View </button>
                 <button type="button">Edit </button>
                 <button type="button">Delete </button>
               </ng-template>
 
             </smom-table>
 
-            <smom-popup  #myPopUp  (colseEvent)="close($event)" >
-              <smom-edit-product-form *ngIf="isOpenPopup"  [product]="product"></smom-edit-product-form>
+            <smom-popup #myPopUp (colseEvent)="close($event)">
+              <smom-edit-product-form *ngIf="isOpenPopup" [product]="product"></smom-edit-product-form>
 
 
             </smom-popup>

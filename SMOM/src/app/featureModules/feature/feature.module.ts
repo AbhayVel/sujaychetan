@@ -7,6 +7,7 @@ import { FilterDirective } from './table/filter.directive';
 import { PopupComponent } from './popup/popup.component';
 import { FormModelDirective } from './form/form-model.directive';
 import { FormDirective } from './form/form.directive';
+import { DateDirective } from './date.directive';
  
 
 
@@ -19,12 +20,13 @@ import { FormDirective } from './form/form.directive';
     PopupComponent,
     FormModelDirective,
     FormDirective,
+    DateDirective,
     
   ],
   imports: [
     CommonModule
   ],
   exports: [PagingComponent, TableComponent, ActionDirective,
-    FilterDirective, PopupComponent, FormModelDirective, FormDirective]
+    FilterDirective, PopupComponent, FormModelDirective, FormDirective, DateDirective]
 })
 export class FeatureModule { }

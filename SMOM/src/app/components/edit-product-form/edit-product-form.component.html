@@ -10,7 +10,10 @@
         <label for="editProductName" class="col-sm-3 control-label">Id: </label>
         <label class="col-sm-1 control-label">: </label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" [smomFormModel]="product"  #id="formModel" required id="editProductName" displayLabel="Id" min="3" max="10"  [value]="product?.id" placeholder="Product Id" name="id" autocomplete="off">
+          <input type="text" class="form-control" [smomFormModel]="product" #id="formModel" required id="editProductName" displayLabel="Id" min="3" max="10" [value]="product?.id" placeholder="Product Id" name="id" autocomplete="off">
+          <input type="text" smomDate class="form-control" autocomplete="off">
+
+
           <div class="alert alert-danger" *ngIf="id.errors?.message?.length>0">
             <span *ngFor="let m of id?.errors?.message">
               {{m}}
@@ -26,7 +29,7 @@
           </div>
           <div class="alert alert-danger" *ngIf="id?.errors?.min">
 
-           Minimum value is 3.
+            Minimum value is 3.
 
 
           </div>

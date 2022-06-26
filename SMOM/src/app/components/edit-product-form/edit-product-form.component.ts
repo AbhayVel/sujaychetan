@@ -18,6 +18,19 @@ export class EditProductFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getDate(d: Date) {
+
+    return `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+  }
+
+  changeDate($event: any) {
+    debugger;
+    let val = $event.target.value.toLowerCase();
+
+    if ("today".indexOf(val) > -1) {
+      $event.target.value = this.getDate(new Date());
+    }
+  }
    
   save() {
     if (this.form?.isValid) {

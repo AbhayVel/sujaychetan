@@ -621,6 +621,27 @@ export class ProductComponent implements OnInit {
   }
   isOpenPopup = false;
   product?: any;
+
+  dated:string="aaaa"
+  getDate(d: Date) {
+
+    return `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+  }
+  
+  changeDate($event: any) {
+    debugger;
+    let val = $event.target.value.toLowerCase();
+
+    let d = new Date();
+    let num = d.getDate();
+    num = num - 1;
+     d.setDate(num);
+    if ("today".indexOf(val) > -1) {
+      $event.target.value = this.getDate(new Date());
+    } else if ("yesterday".indexOf(val) > -1) {
+      $event.target.value = this.getDate(d);
+    }
+  }
   edit(data: any, a: any, b: any) {
     this.product = data;
     this.popupConfig.isShow = true;
