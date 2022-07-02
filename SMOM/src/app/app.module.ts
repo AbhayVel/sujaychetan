@@ -16,6 +16,9 @@ import { ConcatPipe } from './pipes/concat.pipe';
 import { FeatureModule } from './featureModules/feature/feature.module';
 import { PagingComponent } from './featureModules/feature/paging/paging.component';
 import { EditProductFormComponent } from './components/edit-product-form/edit-product-form.component';
+import { EditProductTemplateDrivenComponent } from './components/edit-product-template-driven/edit-product-template-driven.component';
+import { FormsModule } from '@angular/forms';
+import { EditReactiveFOrmComponent } from './components/edit-reactive-form/edit-reactive-form.component';
 
 @NgModule({
   declarations: [
@@ -29,16 +32,21 @@ import { EditProductFormComponent } from './components/edit-product-form/edit-pr
     StatusMasterPipe,
     SortpipePipe,
     ConcatPipe,
-    EditProductFormComponent
+    EditProductFormComponent,
+    EditProductTemplateDrivenComponent,
+    EditReactiveFOrmComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path: '' , component: ProductComponent }  ,
       {path: 'product' , component: ProductComponent }  ,  
-      {path: 'category' , component: CategoryComponent }  ,  
+      { path: 'category', component: CategoryComponent },
+      {path:'product/edit/:id/:action', component: EditReactiveFOrmComponent}
     ]),
-    FeatureModule
+    FeatureModule,
+    FormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

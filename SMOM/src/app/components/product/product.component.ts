@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { filter, getGridPaging, sorts } from 'src/app/utilities/utility';
 import { PopupComponent } from '../../featureModules/feature/popup/popup.component';
 import { PopupConfig } from '../../models/popup';
@@ -620,6 +621,8 @@ export class ProductComponent implements OnInit {
     headerName: 'Edit Product'
   }
   isOpenPopup = false;
+
+  isOpenPopupT = false;
   product?: any;
 
   dated:string="aaaa"
@@ -650,12 +653,25 @@ export class ProductComponent implements OnInit {
     this.myPopUp?.open(this.popupConfig);
   }
 
+  editT(data: any, a: any, b: any) {
+    this.product = data;
+    this.popupConfig.isShow = true;
+    this.popupConfig = { ...this.popupConfig }
+    this.isOpenPopupT = true;
+    this.myPopUpT?.open(this.popupConfig);
+  }
+
+  editR(data: any, a: any, b: any) {
+    this.router.navigate(['product','edit',data.id,'click'  ])
+  }
+  @ViewChild('myPopUpT') myPopUpT?: PopupComponent;
   @ViewChild('myPopUp') myPopUp?: PopupComponent;
   close($event: any) {
      
     this.isOpenPopup = $event;
+    this.isOpenPopupT = false;
   }
-  constructor() { }
+  constructor(private router: Router) { }
 
  
   filterData($event: any, column: any, fun : any) {
