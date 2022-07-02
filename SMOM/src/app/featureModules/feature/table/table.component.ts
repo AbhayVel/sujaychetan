@@ -1,4 +1,5 @@
-import { AfterContentInit, QueryList } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { AfterContentInit, Output, QueryList } from '@angular/core';
 import { Component, ContentChildren, Input, OnInit } from '@angular/core';
 import { SortModel } from '../../../models/sort-model';
 import { getGridPaging } from '../../../utilities/utility';
@@ -14,6 +15,7 @@ export class TableComponent implements OnInit, AfterContentInit {
 
   @ContentChildren(FilterDirective) filter?: QueryList<FilterDirective>;
 
+@Input()  isServerSide? : boolean = false;
   filterElements: any = {
 
   }
@@ -51,12 +53,21 @@ export class TableComponent implements OnInit, AfterContentInit {
     getGridPaging(this.filterObject, this.sortObj);
   }
 
+  @Output() PageChange : EventEmitter<number>= new EventEmitter<number>()
+
   pageChange(p: number) {
+
     if (p < 1 || (p > this.filterObject.pages.length)) {
       return;
     }
     this.filterObject.currentPage = p;
-    getGridPaging(this.filterObject, this.sortObj);
+
+    if (this.isServerSide) {
+      this.PageChange.next(p);
+    } else {
+      getGridPaging(this.filterObject, this.sortObj);
+    }
+   
   }
 
   filterDataDirect(columnName: string, value: any) {    
