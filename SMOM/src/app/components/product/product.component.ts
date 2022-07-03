@@ -674,6 +674,7 @@ export class ProductComponent implements OnInit {
   constructor(private router: Router) { }
 
  
+ 
   filterData($event: any, column: any, fun : any) {
     let value = $event.target.value;
     debugger;

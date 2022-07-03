@@ -19,6 +19,7 @@ import { EditProductFormComponent } from './components/edit-product-form/edit-pr
 import { EditProductTemplateDrivenComponent } from './components/edit-product-template-driven/edit-product-template-driven.component';
 import { FormsModule } from '@angular/forms';
 import { EditReactiveFOrmComponent } from './components/edit-reactive-form/edit-reactive-form.component';
+import { FirstService } from './service/first.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { EditReactiveFOrmComponent } from './components/edit-reactive-form/edit-
     FormsModule,
     
   ],
-  providers: [],
+  providers: [FirstService],
   bootstrap: [AppComponent]
 })
 export class AppModule  { }
