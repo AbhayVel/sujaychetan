@@ -1,16 +1,33 @@
-<table style="width: 100%;">
-  <tr style="width: 100%;">
-      <th (click)="sortColumn('id')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
-          colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Id</th>
-      <th (click)="sortColumn('name')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
-          colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Name</th>
-      <th (click)="sortColumn('description')" class="sorting" tabindex="0" aria-controls="manageProductTable"
-          rowspan="1" colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">
-          Description</th>
-  </tr>
-  <tr *ngFor="let category of categoryDetails">
-      <td style="width: 30%;">{{category.id}}</td>
-      <td style="width: 30%;">{{category.name}}</td>
-      <td [innerHTML]="category.description" style="width: 30%;"></td>
-  </tr>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {{message}} <br />
+      <input type="text" #a />
+      <input type="text" #b />
+
+      <button type="button" (click)="calc(a.value,b.value)">=</button>
+      <span>{{result}}</span>
+
+
+      <button type="button" (click)="startCallBack()">Start CallBack</button><button type="button">Stop CallBack</button>
+      {{timeCallBack}}
+      <table style="width: 100%;">
+        <tr style="width: 100%;">
+          <th (click)="sortColumn('id')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
+              colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Id</th>
+          <th (click)="sortColumn('name')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
+              colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Name</th>
+          <th (click)="sortColumn('description')" class="sorting" tabindex="0" aria-controls="manageProductTable"
+              rowspan="1" colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">
+            Description
+          </th>
+        </tr>
+        <tr *ngFor="let category of categoryDetails">
+          <td style="width: 30%;">{{category.id}}</td>
+          <td style="width: 30%;">{{category.name}}</td>
+          <td [innerHTML]="category.description" style="width: 30%;"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

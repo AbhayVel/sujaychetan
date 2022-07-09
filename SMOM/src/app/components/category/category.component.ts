@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { IMessage } from '../../interface/imessage';
 import { CompanyAddress } from '../../models/company-address';
 import { Employee,Abc,   } from '../../models/employee';
+import { CalcService } from '../../service/calc.service';
 
 import { EmailMessage } from '../../service/email-message';
 import { FirstService } from '../../service/first.service';
@@ -17,7 +18,7 @@ import { SmsMessage } from '../../service/sms-message';
 export class CategoryComponent implements OnInit {
 
  // first!: FirstService;
-  constructor(private first: FirstService) {
+  constructor(private first: FirstService, private cal: CalcService) {
     //this.first = first;
   }
   categoryDetails: Array<any>=[
@@ -46,7 +47,79 @@ export class CategoryComponent implements OnInit {
   ];
 
   orderBy = -1;
+  result: any = "";
+  message: any = "";
+  timeCallBack = "";
+  startCallBack() {
+    this.cal.startCallBack((res: any) => {
+      this.timeCallBack = res;
+    });
+  }
+  async calc(a: any, b: any) {
 
+
+
+    // try {
+    //  this.result = await this.cal.devObs(a, b).toPromise();
+    //  this.message = "";
+    //} catch (ex) {
+    //  this.message = ex;
+    //}
+
+    //this.cal.devObs(a, b).toPromise().then((res) => {
+    //  debugger;
+    //  this.result = res;
+    //  this.message = "";
+    //}, (ex) => {
+    //  debugger;
+    //  this.result = "";
+    //  this.message = ex;
+    //});
+
+    //this.cal.devObs(a, b).subscribe((res) => {
+    //  this.result = res;
+    //  this.message = "";
+    //},
+    //  (ex) => {
+    //    this.result = "";
+    //    this.message = ex;
+    //  },
+
+    //)
+    //try {
+    //  this.result = await this.cal.devPromise(a, b);
+    //  this.message = "";
+    //} catch (ex) {
+    //  this.message = ex;
+    //}
+  
+    //this.cal.devPromise(a, b).then((res) => {
+    //  this.result = res;
+    //  this.message = "";
+    //}, (ex) => {
+    //  this.result = "";
+    //  this.message = ex;
+    //});
+
+    //this.cal.devCallBack(a, b, (res: any) => {
+    //  this.result =res;
+    // this.message = "";
+    //}, (ex: any) => {
+    //  this.result = "";
+    //  this.message = ex;
+    //}
+
+
+   // )
+    //try {
+    //  this.result = this.cal.dev(a, b);
+    //  this.message = "";
+    //} catch (ex) {
+    //  this.message = ex;
+    //  this.result = "";
+    //}
+   
+  }
 
   //Association -> Reusability
   //-->Method

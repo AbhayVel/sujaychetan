@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CalcService } from '../../service/calc.service';
 
 @Component({
   selector: 'smom-edit-reactive-form',
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditReactiveFOrmComponent implements OnInit {
 
-  constructor(private  ac: ActivatedRoute, private router: Router) { }
+  constructor(private ac: ActivatedRoute, private router: Router, private calc: CalcService) { }
 
   id: string = '';
   action: string = '';
