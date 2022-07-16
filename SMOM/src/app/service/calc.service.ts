@@ -15,6 +15,69 @@ export class CalcService {
     }, 1000)
   }
 
+
+ locationData= (o: Observer<any>) => {
+
+   window.navigator.geolocation.getCurrentPosition((res) => {
+     o.next(res);
+   })
+
+}
+
+  getCurrentLatLan() {
+    return new Observable(this.locationData);
+  }
+
+  myOf(...args: any) {
+    return new Observable((o: Observer<any>) => {
+      for (var i = 0; i < args.length; i++) {
+        o.next(args[i]);
+      }
+      o.complete();
+    })
+
+  }
+
+
+  myinterval(num: number) {
+    let i = 0;
+    return new Observable((o: Observer<any>) => {
+      setInterval(() => {
+        o.next(i++);
+      }, num)
+    })
+  }
+
+
+  startPromise() {
+    return new Promise((succ) => {
+      setInterval(() => {
+        succ(new Date())
+      }, 1000)
+    })
+    
+  }
+
+  stopObsInterVal() {
+    clearInterval(this.inertval)
+  }
+
+  inertval: any=0;
+
+  startObs() {
+  let  i = 0;
+    return new Observable((o: Observer<any>) => {
+      if (this.inertval != 0) {
+
+      }
+      this.inertval=  setInterval(() => {
+        o.next(new Date())
+        console.log(i++);
+      }, 1000)
+    })
+
+  }
+
   devObs(a: number, b: number) {
     return new Observable((o: Observer<any>) => {
       debugger;

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Subscription, of, interval, filter, map, Observable, ObservedValueOf, Observer, skip, findIndex } from 'rxjs';
 import { IMessage } from '../../interface/imessage';
 import { CompanyAddress } from '../../models/company-address';
 import { Employee,Abc,   } from '../../models/employee';
@@ -8,6 +9,109 @@ import { EmailMessage } from '../../service/email-message';
 import { FirstService } from '../../service/first.service';
 import { Message } from '../../service/message';
 import { SmsMessage } from '../../service/sms-message';
+
+
+function MyMap(fun: any) {
+
+  return function (Obs: Observable<any>) {   //currying function 
+    return new Observable((o: Observer<any>) => {
+      Obs.subscribe((r) => {
+        o.next(fun(r))
+      },
+        (err) => {
+
+        } ,
+        () => {
+          o.complete();
+        }
+
+      )
+    })
+  }
+}
+
+function MyFilter(fun: any) {
+  return function (Obs: Observable<any>) {   //currying function 
+    return new Observable((o: Observer<any>) => {
+      Obs.subscribe((r) => {
+        let t = fun(r);
+        debugger;
+        if (fun(r)) {
+          o.next(r)
+        }
+      
+      },
+        (err) => {
+
+        },
+        () => {
+          o.complete();
+        }
+
+
+      )
+    })
+  }
+}
+
+
+function MySkip(num: number) {
+  return function (Obs: Observable<any>) {   //currying function
+    let i = 1;
+    return new Observable((o: Observer<any>) => {
+
+      Obs.subscribe((r) => {
+        if (i > num) {
+          o.next(r);
+        }
+        i = i + 1;
+
+         
+        
+
+      },
+        (err) => {
+
+        },
+        () => {
+          o.complete();
+        }
+
+
+      )
+    })
+  }
+}
+
+
+
+function MyFindIndex(fun : any) {
+  return function (Obs: Observable<any>) {   //currying function
+    let i = 0;
+    return new Observable((o: Observer<any>) => {
+
+      Obs.subscribe((r) => {
+        if (fun(r)) {
+          o.next(i);
+          o.complete();
+        }
+        i = i + 1;
+
+
+
+      },
+        (err) => {
+
+        },
+        () => {
+          o.complete();
+        }
+
+
+      )
+    })
+  }
+}
 
 @Component({
   selector: 'smom-category',
@@ -50,10 +154,97 @@ export class CategoryComponent implements OnInit {
   result: any = "";
   message: any = "";
   timeCallBack = "";
+  timePromise = "";
+  timeObs = "";
   startCallBack() {
     this.cal.startCallBack((res: any) => {
       this.timeCallBack = res;
     });
+  }
+
+  startPromise() {
+    this.cal.startPromise().then((res: any) => {
+      this.timePromise = res;
+    });
+     
+  }
+
+  currentLocation: string = "";
+
+  getLL() {
+    this.cal.getCurrentLatLan().subscribe((r: any) => {
+      debugger;
+      this.currentLocation = `your current location is ${r.coords.latitude} ${r.coords.longitude}`;
+
+    })
+  }
+  getMyOf() {
+    this.cal.myOf(1, 2, 3, 4, 5).subscribe((r) => {
+      console.log(`I am in My of ${r}`)
+    })
+  }
+
+  getOf() {
+    of(1, 2, 3, 4, 5).subscribe((r) => {
+      console.log(`I am in of ${r}`)
+    })
+  }
+  getInterval() {
+    interval(1000).subscribe((r) => {
+      console.log(`I am in Interval ${r}`)
+    })
+  }
+
+  getMyInterval() {
+    this.cal.myinterval(1000).subscribe((r) => {
+      console.log(`I am in my Interval ${r}`)
+    })
+  }
+
+
+  getMyMap() {
+    of(1, 23, 6, 8, 9, 5, 2, 7, 16, 18).pipe(MyMap((x: any) => x * 3)).subscribe((r) => {
+
+      console.log(`I am in of ${r}`)
+    })
+  }
+
+  getMap() {
+    of(1, 23, 6, 8, 9, 5, 2, 7, 16, 18).pipe(map(x => x*3)).subscribe((r) => {
+
+      console.log(`I am in of ${r}`)
+    })
+  }
+
+  getMyFilter() {
+    of(1, 23, 6, 8, 9, 5, 2, 7, 16, 18).pipe(map(x => x * 3), MyFilter((x: any) => x % 2 == 0)).subscribe((r) => {
+
+      console.log(`I am in of ${r}`)
+    })
+  }
+
+  getFilter() {
+    of(1, 23, 6, 8, 9, 5, 2, 7, 16, 18).pipe(MyFindIndex((x: any)=>x==2)).subscribe((r) => {
+ 
+      console.log(`I am in of ${r}`)
+    })
+  }
+  stopObs() {
+    debugger;
+    if (this.mysub) {
+      this.cal.stopObsInterVal();
+      this.mysub.unsubscribe();
+    }
+  
+  }
+
+  mysub!: Subscription;
+  startObs() {
+  this.mysub=  this.cal.startObs().subscribe((res: any) => {
+    this.timeObs = res;
+
+    });
+
   }
   async calc(a: any, b: any) {
 
