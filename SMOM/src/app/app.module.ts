@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
- 
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FirstComponent } from './components/first/first.component';
@@ -16,6 +16,10 @@ import { ConcatPipe } from './pipes/concat.pipe';
 import { FeatureModule } from './featureModules/feature/feature.module';
 import { PagingComponent } from './featureModules/feature/paging/paging.component';
 import { EditProductFormComponent } from './components/edit-product-form/edit-product-form.component';
+import { EditProductTemplateDrivenComponent } from './components/edit-product-template-driven/edit-product-template-driven.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditReactiveFOrmComponent } from './components/edit-reactive-form/edit-reactive-form.component';
+import { FirstService } from './service/first.service';
 
 @NgModule({
   declarations: [
@@ -29,18 +33,24 @@ import { EditProductFormComponent } from './components/edit-product-form/edit-pr
     StatusMasterPipe,
     SortpipePipe,
     ConcatPipe,
-    EditProductFormComponent
+    EditProductFormComponent,
+    EditProductTemplateDrivenComponent,
+    EditReactiveFOrmComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path: '' , component: ProductComponent }  ,
       {path: 'product' , component: ProductComponent }  ,  
-      {path: 'category' , component: CategoryComponent }  ,  
+      { path: 'category', component: CategoryComponent },
+      {path:'product/edit/:id/:action', component: EditReactiveFOrmComponent}
     ]),
-    FeatureModule
+    FeatureModule,
+    FormsModule,
+    ReactiveFormsModule,
+        HttpClientModule
   ],
-  providers: [],
+  providers: [FirstService],
   bootstrap: [AppComponent]
 })
 export class AppModule  { }

@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { filter, getGridPaging, sorts } from 'src/app/utilities/utility';
 import { PopupComponent } from '../../featureModules/feature/popup/popup.component';
 import { PopupConfig } from '../../models/popup';
 import { SortModel } from '../../models/sort-model';
+import { ProductService } from '../../service/product.service';
 
 @Component({
   selector: 'smom-product',
@@ -12,487 +14,7 @@ import { SortModel } from '../../models/sort-model';
 })
 export class ProductComponent implements OnInit {
 
-  products: Array<any>=[
-    {
-      id: 1,
-      productName: 'Horn - Regular Size',
-      rate: 225,
-      currentQuantity: 14,
-      totalQuantity: 24,
-      brand: 'Automobile',
-      categoryId: 1,
-      category:{
-        id: 1,
-        name: 'Automobile'
-      } ,
-      status: 2
-    },
-    {
-      id: 2,
-      productName: `Horn - Small`,
-      rate: 200,
-      currentQuantity: 5,
-      totalQuantity: 10,
-      brand: 'Automobile',
-      categoryId: 2,
-      category:{
-        id: 1,
-        name: 'Automobile'
-      } ,
-      status: 1
-    },
-    {
-      id: 3,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category:{
-        id: 3,
-        name: 'Hero'
-      } ,
-      status: 1
-    },
-    {
-      id: 4,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 5,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 6,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 7,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 8,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 9,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 10,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 11,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 12,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 13,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 14,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 15,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 16,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 17,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 18,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 19,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 20,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 21,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 22,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 23,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 24,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 25,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 26,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 27,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 28,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 29,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 30,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 31,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 32,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 33,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-    {
-      id: 34,
-      productName: 'Pannal lok',
-      rate: 60,
-      currentQuantity: 2,
-      totalQuantity: 5,
-      brand: 'Automobile',
-      categoryId: 3,
-      category: {
-        id: 3,
-        name: 'Hero'
-      },
-      status: 1
-    },
-   
-
-  ]
-
+  products: Array<any> = [];
   filterObject: any = {
     rows: [],
     data: [],
@@ -620,7 +142,30 @@ export class ProductComponent implements OnInit {
     headerName: 'Edit Product'
   }
   isOpenPopup = false;
+
+  isOpenPopupT = false;
   product?: any;
+
+  dated:string="aaaa"
+  getDate(d: Date) {
+
+    return `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+  }
+  
+  changeDate($event: any) {
+    debugger;
+    let val = $event.target.value.toLowerCase();
+
+    let d = new Date();
+    let num = d.getDate();
+    num = num - 1;
+     d.setDate(num);
+    if ("today".indexOf(val) > -1) {
+      $event.target.value = this.getDate(new Date());
+    } else if ("yesterday".indexOf(val) > -1) {
+      $event.target.value = this.getDate(d);
+    }
+  }
   edit(data: any, a: any, b: any) {
     this.product = data;
     this.popupConfig.isShow = true;
@@ -629,13 +174,27 @@ export class ProductComponent implements OnInit {
     this.myPopUp?.open(this.popupConfig);
   }
 
+  editT(data: any, a: any, b: any) {
+    this.product = data;
+    this.popupConfig.isShow = true;
+    this.popupConfig = { ...this.popupConfig }
+    this.isOpenPopupT = true;
+    this.myPopUpT?.open(this.popupConfig);
+  }
+
+  editR(data: any, a: any, b: any) {
+    this.router.navigate(['product','edit',data.id,'click'  ])
+  }
+  @ViewChild('myPopUpT') myPopUpT?: PopupComponent;
   @ViewChild('myPopUp') myPopUp?: PopupComponent;
   close($event: any) {
      
     this.isOpenPopup = $event;
+    this.isOpenPopupT = false;
   }
-  constructor() { }
+  constructor(private router: Router, private ps: ProductService) { }
 
+ 
  
   filterData($event: any, column: any, fun : any) {
     let value = $event.target.value;
@@ -648,8 +207,12 @@ export class ProductComponent implements OnInit {
    
  
   ngOnInit(): void {
-    this.filterObject.data = this.products;
-    this.filterObject.rows = this.products;
+
+    this.ps.getAllData().then((d) => {
+      this.filterObject.data =d;
+      this.filterObject.rows = d;
+    })
+   
     
   }
 

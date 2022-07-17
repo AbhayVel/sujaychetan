@@ -32,7 +32,6 @@ export class FormModelDirective implements OnInit {
   changeData($event: any) {
     let element = $event.target;
     let value = element.value;
-    console.log(`I am in change Data ${value}`);
     let name = element.getAttribute("name");
     this.model[name] = value;
     this.validateElement(element);

@@ -1,16 +1,59 @@
-<table style="width: 100%;">
-  <tr style="width: 100%;">
-      <th (click)="sortColumn('id')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
-          colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Id</th>
-      <th (click)="sortColumn('name')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
-          colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Name</th>
-      <th (click)="sortColumn('description')" class="sorting" tabindex="0" aria-controls="manageProductTable"
-          rowspan="1" colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">
-          Description</th>
-  </tr>
-  <tr *ngFor="let category of categoryDetails">
-      <td style="width: 30%;">{{category.id}}</td>
-      <td style="width: 30%;">{{category.name}}</td>
-      <td [innerHTML]="category.description" style="width: 30%;"></td>
-  </tr>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {{message}} <br />
+      <input type="text" #a />
+      <input type="text" #b />
+
+      <button type="button" (click)="calc(a.value,b.value)">=</button>
+      <span>{{result}}</span>
+
+      <br />
+      <button type="button" (click)="startCallBack()">Start CallBack</button><button type="button">Stop CallBack</button>
+      {{timeCallBack}}    <br />
+      <br />
+      <button type="button" (click)="startPromise()">Start Promise</button><button type="button">Stop Promise</button>
+      {{timePromise}}    <br />
+
+      <br />
+      <button type="button" (click)="startObs()">Start Obs</button><button type="button" (click)="stopObs()">Stop Obs</button>
+      {{timeObs}}    <br />
+
+      <button type="button" (click)="getLL()">Get Location</button>
+      {{currentLocation}}  <br />
+
+
+
+
+      <button type="button" (click)="getOf()">Obs Of</button>
+      <button type="button" (click)="getMyOf()">My Of</button> <br />
+
+      <button type="button" (click)="getInterval()">Obs Interval</button>
+      <button type="button" (click)="getMyInterval()">My Interval</button> <br />
+
+      <button type="button" (click)="getMap()">Obs Map</button>
+      <button type="button" (click)="getMyMap()">My Map</button> <br />
+
+
+      <button type="button" (click)="getFilter()">Obs Filter</button>
+      <button type="button" (click)="getMyFilter()">My Filter</button> <br />
+      <table style="width: 100%;">
+        <tr style="width: 100%;">
+          <th (click)="sortColumn('id')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
+              colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Id</th>
+          <th (click)="sortColumn('name')" class="sorting" tabindex="0" aria-controls="manageProductTable" rowspan="1"
+              colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">Name</th>
+          <th (click)="sortColumn('description')" class="sorting" tabindex="0" aria-controls="manageProductTable"
+              rowspan="1" colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 30%;">
+            Description
+          </th>
+        </tr>
+        <tr *ngFor="let category of categoryDetails">
+          <td style="width: 30%;">{{category.id}}</td>
+          <td style="width: 30%;">{{category.name}}</td>
+          <td [innerHTML]="category.description" style="width: 30%;"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
