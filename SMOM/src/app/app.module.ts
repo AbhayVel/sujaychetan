@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
- 
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FirstComponent } from './components/first/first.component';
@@ -17,7 +17,7 @@ import { FeatureModule } from './featureModules/feature/feature.module';
 import { PagingComponent } from './featureModules/feature/paging/paging.component';
 import { EditProductFormComponent } from './components/edit-product-form/edit-product-form.component';
 import { EditProductTemplateDrivenComponent } from './components/edit-product-template-driven/edit-product-template-driven.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditReactiveFOrmComponent } from './components/edit-reactive-form/edit-reactive-form.component';
 import { FirstService } from './service/first.service';
 
@@ -47,7 +47,8 @@ import { FirstService } from './service/first.service';
     ]),
     FeatureModule,
     FormsModule,
-    
+    ReactiveFormsModule,
+        HttpClientModule
   ],
   providers: [FirstService],
   bootstrap: [AppComponent]
