@@ -52,6 +52,24 @@ export class ProductService {
     })
   }
 
+  deleteData(obj: Product) {
+    return new Observable((o: Observer<any>) => {
+      let index = this.products.findIndex((e) => {
+        return e.id == obj.id;
+      });
+
+      if (index > -1) {
+        this.products.splice(index, 1);
+      } 
+      debugger;
+      this.api.put(this.url, this.products).subscribe((r) => {
+        o.next(r);
+      }, (error) => {
+        o.error(error);
+      })
+    })
+  }
+
 
   save(obj: Product) {
 

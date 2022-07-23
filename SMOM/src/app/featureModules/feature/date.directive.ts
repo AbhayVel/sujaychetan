@@ -9,7 +9,7 @@ export class DateDirective implements OnInit {
 
   constructor(private ele: ElementRef<any>) { }
   ngOnInit(): void {
-    debugger;
+  
       this.changeDate(this.ele.nativeElement, this.ele.nativeElement.value );
     }
 
@@ -30,12 +30,12 @@ export class DateDirective implements OnInit {
 
   isValidDate(dateStr: string): boolean {
     let arrDate: Array<any> = dateStr.split('-');
-    debugger;
+ 
     if (arrDate.length != 3) {
       return false;
     }
     let d = new Date(+arrDate[2], (+arrDate[1]-1), +arrDate[0]);
-    debugger;
+    
     if (d.getDate() == +arrDate[0] && (d.getMonth()+1) == +arrDate[1] && d.getFullYear() == +arrDate[2]) {
       return true;
     }
@@ -46,7 +46,7 @@ export class DateDirective implements OnInit {
 
   @HostListener('blur',['$event.target', '$event.target.value'])
   changeDate($event: any, value: any) {
-    debugger;
+    
     let val = $event.value.toLowerCase();
 
     let d = new Date();

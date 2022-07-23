@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { AfterContentInit, Output, QueryList } from '@angular/core';
 import { Component, ContentChildren, Input, OnInit } from '@angular/core';
 import { SortModel } from '../../../models/sort-model';
@@ -11,7 +11,7 @@ import { FilterDirective } from './filter.directive';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, AfterContentInit {
+export class TableComponent implements OnInit, AfterContentInit, OnChanges {
 
   @ContentChildren(FilterDirective) filter?: QueryList<FilterDirective>;
 
@@ -36,7 +36,13 @@ export class TableComponent implements OnInit, AfterContentInit {
 
   @Input() filterObject?: any;
 
+  @Input() data?: any;
+
   constructor() { }
+    ngOnChanges(changes: SimpleChanges): void {
+      getGridPaging(this.filterObject, this.sortObj);
+      
+    }
     ngAfterContentInit(): void {
       this.filter?.forEach((e: any) => {
         this.filterElements[e.name] = e.temp;
@@ -78,7 +84,7 @@ export class TableComponent implements OnInit, AfterContentInit {
   filterData(columnName: string, eve: any) {
     let value = eve.target.value;
     this.filterObject.filter[columnName].value = value;
-    debugger;
+ 
     // this.pageChange(this.filterObject.currentPage);
     getGridPaging(this.filterObject, this.sortObj);
   }
@@ -91,7 +97,8 @@ export class TableComponent implements OnInit, AfterContentInit {
       this.sortObj.orderBy = this.sortObj?.orderBy * -1;
       this.sortObj.columnName = columnName;
       this.sortObj.sortType = sortType;
-    }   
+    }
+ 
     getGridPaging(this.filterObject, this.sortObj);
   }
 
