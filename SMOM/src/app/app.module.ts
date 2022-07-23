@@ -20,6 +20,8 @@ import { EditProductTemplateDrivenComponent } from './components/edit-product-te
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditReactiveFOrmComponent } from './components/edit-reactive-form/edit-reactive-form.component';
 import { FirstService } from './service/first.service';
+import { LoginComponent } from './components/login/login.component';
+import { LoginGuard } from './guards/login.guard';
 
 @NgModule({
   declarations: [
@@ -35,15 +37,17 @@ import { FirstService } from './service/first.service';
     ConcatPipe,
     EditProductFormComponent,
     EditProductTemplateDrivenComponent,
-    EditReactiveFOrmComponent
+    EditReactiveFOrmComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      {path: '' , component: ProductComponent }  ,
-      {path: 'product' , component: ProductComponent }  ,  
-      { path: 'category', component: CategoryComponent },
-      {path:'product/edit/:id/:action', component: EditReactiveFOrmComponent}
+      { path: '', component: ProductComponent, canActivate: [LoginGuard] }  ,
+      { path: 'product', component: ProductComponent, canActivate: [LoginGuard] }  ,
+      { path: 'category', component: CategoryComponent, canActivate: [LoginGuard] },
+      { path: 'product/edit/:id/:action', component: EditReactiveFOrmComponent, canActivate: [LoginGuard] }   ,
+      { path: 'login', component: LoginComponent}
     ]),
     FeatureModule,
     FormsModule,

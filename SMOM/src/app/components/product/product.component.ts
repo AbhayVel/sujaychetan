@@ -175,10 +175,10 @@ export class ProductComponent implements OnInit {
   }
   deleteData(data: any, a: any, b: any) {
     if (confirm("Do you really want to delete?")) {
-      this.ps.deleteData(data).subscribe((res) => {
+      this.ps.deleteData(data).subscribe((res: any) => {
         debugger;
         this.ngOnInit();
-      }, (err) => {
+      }, (err: any) => {
         alert(err.message);
       })
     }
@@ -217,7 +217,7 @@ export class ProductComponent implements OnInit {
  
   ngOnInit(): void {
 
-    this.ps.getAllData().then((d) => {
+    this.ps.getAllData().then((d: any) => {
       
       this.filterObject.data =d;     
     })
