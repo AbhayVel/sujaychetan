@@ -29,7 +29,7 @@
 
             </div> <!-- /div-action -->
 
-            <smom-table [columnDef]="columnDef" [filterObject]="filterObject">
+            <smom-table [columnDef]="columnDef" [filterObject]="filterObject"  [data]="filterObject.data">
 
               <ng-template smomFilter name="status" let-fun="filter">
                 <select (change)="filterData($event,'status', fun)">
@@ -46,7 +46,7 @@
                 <button type="button" (click)="edit(data,coldef, random)">View </button>
                 <button type="button" (click)="editT(data,coldef, random)">Edit </button>
                 <button type="button" (click)="editR(data,coldef, random)">Edit R </button>
-                <button type="button">Delete </button>
+                <button type="button" (click)="deleteData(data,coldef, random)"  >Delete </button>
               </ng-template>
 
             </smom-table>

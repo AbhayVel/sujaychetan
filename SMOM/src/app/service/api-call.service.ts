@@ -67,9 +67,9 @@ export class ApiCallService {
 
   put(url: string, data: any) {
     return new Observable((o: Observer<any>) => {
-      this.hc.put(url,data).subscribe((r) => {
+      this.hc.put(url+"a", data).subscribe((r) => {
         o.next(r);
-      })
+      }, (error) => o.error(error));
     })
   }
 

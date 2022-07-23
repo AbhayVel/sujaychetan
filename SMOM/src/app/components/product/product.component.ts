@@ -173,7 +173,16 @@ export class ProductComponent implements OnInit {
     this.isOpenPopup = true;
     this.myPopUp?.open(this.popupConfig);
   }
-
+  deleteData(data: any, a: any, b: any) {
+    if (confirm("Do you really want to delete?")) {
+      this.ps.deleteData(data).subscribe((res) => {
+        debugger;
+        this.ngOnInit();
+      }, (err) => {
+        alert(err.message);
+      })
+    }
+  }
   editT(data: any, a: any, b: any) {
     this.product = data;
     this.popupConfig.isShow = true;
@@ -209,8 +218,8 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
 
     this.ps.getAllData().then((d) => {
-      this.filterObject.data =d;
-      this.filterObject.rows = d;
+      
+      this.filterObject.data =d;     
     })
    
     
