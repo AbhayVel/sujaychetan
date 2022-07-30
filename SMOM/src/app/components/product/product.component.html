@@ -21,7 +21,7 @@
             <div class="remove-messages"></div>
 
             <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;">
-              <button class="btn btn-default button1" data-toggle="modal" id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Product </button>
+              <button class="btn btn-default button1" data-toggle="modal" *ngIf="'admin,dev' | role"  id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Product </button>
             </div> <!-- /div-action -->
 
             <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;">

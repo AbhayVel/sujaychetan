@@ -39,13 +39,12 @@
      <li id="navReport"><a href="http://localhost/stock/order_item_report.php"> <i class="glyphicon glyphicon-check"></i> Order Item Report </a></li>
       <li id="navReport"><a href="http://localhost/stock/pending_payment_order_view.php" target="_blank"> <i class="glyphicon glyphicon-check"></i> Pending Payment Order Report </a></li>
     <li id="navReport"><a href="http://localhost/stock/productview.php" target="_blank"> <i class="glyphicon glyphicon-check"></i> View Stock </a></li>
-    <li id="navReport"><a href="http://localhost/stock/no_stock_productview.php" target="_blank"> <i class="glyphicon glyphicon-check"></i> No Stock </a></li>
-  
-        <li class="dropdown" id="navSetting">
-          <a href="http://localhost/stock/product.php#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">            
-            <li id="topNavSetting"><a href="http://localhost/stock/setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>            
-            <li id="topNavLogout"><a href="http://localhost/stock/logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
+     
+        <li class="dropdown" id="navSetting" (mouseover)="isHover=true" (mouseout)="isHover=false">
+          <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu" [class.show]="isHover">            
+            <li id="topNavSetting"><a > <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>            
+            <li id="topNavLogout"  (click)="logout()"><a > <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
           </ul>
         </li>        
                

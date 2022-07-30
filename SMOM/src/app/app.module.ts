@@ -22,6 +22,9 @@ import { EditReactiveFOrmComponent } from './components/edit-reactive-form/edit-
 import { FirstService } from './service/first.service';
 import { LoginComponent } from './components/login/login.component';
 import { LoginGuard } from './guards/login.guard';
+import { RolePipe } from './pipes/role.pipe';
+import { UnAuthComponent } from './components/un-auth/un-auth.component';
+import { RoleGuardGuard } from './guards/role-guard.guard';
 
 @NgModule({
   declarations: [
@@ -38,16 +41,19 @@ import { LoginGuard } from './guards/login.guard';
     EditProductFormComponent,
     EditProductTemplateDrivenComponent,
     EditReactiveFOrmComponent,
-    LoginComponent
+    LoginComponent,
+    RolePipe,
+    UnAuthComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       { path: '', component: ProductComponent, canActivate: [LoginGuard] }  ,
-      { path: 'product', component: ProductComponent, canActivate: [LoginGuard] }  ,
-      { path: 'category', component: CategoryComponent, canActivate: [LoginGuard] },
+      { path: 'product', component: ProductComponent, data: { role: 'admin,sales,dev' }, canActivate: [LoginGuard, RoleGuardGuard] }  ,
+      { path: 'category', component: CategoryComponent, data: {role: 'admin,sales'}, canActivate: [LoginGuard, RoleGuardGuard ] },
       { path: 'product/edit/:id/:action', component: EditReactiveFOrmComponent, canActivate: [LoginGuard] }   ,
-      { path: 'login', component: LoginComponent}
+      { path: 'login', component: LoginComponent },
+      { path: 'unAuth', component: UnAuthComponent }
     ]),
     FeatureModule,
     FormsModule,

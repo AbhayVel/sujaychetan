@@ -26,6 +26,22 @@ export class LoginComponent implements OnInit {
       }
 
       this.ls.login(user);
+    } else if (user == 'abhay' && pass == 'abc') {
+      const user = {
+        unserName: 'Abhay',
+        role: 'sales',
+
+      }
+
+      this.ls.login(user);
+    } else if (user == 'sneha' && pass == 'abc') {
+      const user = {
+        unserName: 'Sneha',
+        role: 'dev',
+
+      }
+
+      this.ls.login(user);
     }
 
   }

@@ -47,7 +47,7 @@
         <div class="col-sm-8">
           <!--<input type="text" class="form-control" id="editProductName" [smomFormModel]="product" #productName="formModel" minLength="7" max-length="30" displayLabel="Product Name" [value]="product?.productName" placeholder="Product Name" name="productName" autocomplete="off">-->
 
-          <input type="text" class="form-control" id="editProductName" required [(ngModel)]="product.productName" #productName="ngModel" minLength="7" max-length="30" displayLabel="Product Name" placeholder="Product Name" name="productName" autocomplete="off">
+          <input type="text" class="form-control" id="editProductName"  [attr.disabled]="!('admin' | role)?'disabled':null" required [(ngModel)]="product.productName" #productName="ngModel" minLength="7" max-length="30" displayLabel="Product Name" placeholder="Product Name" name="productName" autocomplete="off">
           <!--<div class="alert alert-danger" *ngIf="productName?.errors?.message?.length>0">
     <span *ngFor="let m of productName?.errors?.message">
       {{m}}
