@@ -4,13 +4,19 @@ import { filter, getGridPaging, sorts } from 'src/app/utilities/utility';
 import { PopupComponent } from '../../featureModules/feature/popup/popup.component';
 import { PopupConfig } from '../../models/popup';
 import { SortModel } from '../../models/sort-model';
+import { FirstService } from '../../service/first.service';
 import { ProductService } from '../../service/product.service';
+import { SecondService } from '../../service/second.service';
 
 @Component({
   selector: 'smom-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 
+  providers: [
+    {
+      provide: FirstService, useClass: SecondService}
+  ]
 })
 export class ProductComponent implements OnInit {
 
@@ -175,10 +181,10 @@ export class ProductComponent implements OnInit {
   }
   deleteData(data: any, a: any, b: any) {
     if (confirm("Do you really want to delete?")) {
-      this.ps.deleteData(data).subscribe((res) => {
+      this.ps.deleteData(data).subscribe((res: any) => {
         debugger;
         this.ngOnInit();
-      }, (err) => {
+      }, (err: any) => {
         alert(err.message);
       })
     }
@@ -191,8 +197,11 @@ export class ProductComponent implements OnInit {
     this.myPopUpT?.open(this.popupConfig);
   }
 
+  showError() {
+    throw "I am in exception";
+  }
   editR(data: any, a: any, b: any) {
-    this.router.navigate(['product','edit',data.id,'click'  ])
+    this.router.navigate(['product','editsame',data.id,'click'  ])
   }
   @ViewChild('myPopUpT') myPopUpT?: PopupComponent;
   @ViewChild('myPopUp') myPopUp?: PopupComponent;
@@ -201,8 +210,12 @@ export class ProductComponent implements OnInit {
     this.isOpenPopup = $event;
     this.isOpenPopupT = false;
   }
-  constructor(private router: Router, private ps: ProductService) { }
+  constructor(private router: Router, private ps: ProductService, private fs: FirstService) { }
 
+
+  showFirstServiceMessage() {
+    alert(this.fs.getData());
+  }
  
  
   filterData($event: any, column: any, fun : any) {
@@ -217,7 +230,7 @@ export class ProductComponent implements OnInit {
  
   ngOnInit(): void {
 
-    this.ps.getAllData().then((d) => {
+    this.ps.getAllData().then((d: any) => {
       
       this.filterObject.data =d;     
     })
