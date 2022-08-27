@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,6 +25,10 @@ import { LoginGuard } from './guards/login.guard';
 import { RolePipe } from './pipes/role.pipe';
 import { UnAuthComponent } from './components/un-auth/un-auth.component';
 import { RoleGuardGuard } from './guards/role-guard.guard';
+import { LoadGuardGuard } from './guards/load-guard.guard';
+import { GlobalErrorHandler } from './utilities/MyError';
+
+
 
 @NgModule({
   declarations: [
@@ -49,18 +53,36 @@ import { RoleGuardGuard } from './guards/role-guard.guard';
     BrowserModule,
     RouterModule.forRoot([
       { path: '', component: ProductComponent, canActivate: [LoginGuard] }  ,
-      { path: 'product', component: ProductComponent, data: { role: 'admin,sales,dev' }, canActivate: [LoginGuard, RoleGuardGuard] }  ,
+      {
+        path: 'product', component: ProductComponent,
+
+        children: [
+          { path:'editsame/:id/:action', component: EditReactiveFOrmComponent}
+
+        ]  ,
+
+        data: { role: 'admin,sales,dev' }, canActivate: [LoginGuard, RoleGuardGuard]
+      },
       { path: 'category', component: CategoryComponent, data: {role: 'admin,sales'}, canActivate: [LoginGuard, RoleGuardGuard ] },
       { path: 'product/edit/:id/:action', component: EditReactiveFOrmComponent, canActivate: [LoginGuard] }   ,
       { path: 'login', component: LoginComponent },
-      { path: 'unAuth', component: UnAuthComponent }
+      { path: 'unAuth', component: UnAuthComponent },
+      { path: 'purchase', loadChildren: () => import('./modules/purchase/purchase.module').then(mod => mod.PurchaseModule), canLoad:[LoginGuard]} ,
+      { path: 'order', loadChildren: () => import('./modules/order/order.module').then(mod => mod.OrderModule), canLoad: [LoadGuardGuard] }
+
+
     ]),
     FeatureModule,
     FormsModule,
     ReactiveFormsModule,
-        HttpClientModule
+    HttpClientModule,
+    
   ],
-  providers: [FirstService],
+  providers: [FirstService,
+
+    { provide: ErrorHandler, useFactory: () => new GlobalErrorHandler()}
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule  { }

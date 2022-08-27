@@ -21,7 +21,7 @@
             <div class="remove-messages"></div>
 
             <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;">
-              <button class="btn btn-default button1" data-toggle="modal" *ngIf="'admin,dev' | role"  id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Product </button>
+              <button class="btn btn-default button1" data-toggle="modal" *ngIf="'admin,dev' | role" id="addProductModalBtn" data-target="#addProductModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Product </button>
             </div> <!-- /div-action -->
 
             <div class="div-action pull pull-right" style="padding-bottom:20px;padding-left:10px;">
@@ -29,7 +29,10 @@
 
             </div> <!-- /div-action -->
 
-            <smom-table [columnDef]="columnDef" [filterObject]="filterObject"  [data]="filterObject.data">
+            <button type="button" (click)="showFirstServiceMessage()">Show First Service Message</button>
+
+            <button type="button" (click)="showError()">Show Error</button>
+            <smom-table [columnDef]="columnDef" [filterObject]="filterObject" [data]="filterObject.data">
 
               <ng-template smomFilter name="status" let-fun="filter">
                 <select (change)="filterData($event,'status', fun)">
@@ -46,22 +49,22 @@
                 <button type="button" (click)="edit(data,coldef, random)">View </button>
                 <button type="button" (click)="editT(data,coldef, random)">Edit </button>
                 <button type="button" (click)="editR(data,coldef, random)">Edit R </button>
-                <button type="button" (click)="deleteData(data,coldef, random)"  >Delete </button>
+                <button type="button" (click)="deleteData(data,coldef, random)">Delete </button>
               </ng-template>
 
             </smom-table>
 
-            <smom-popup #myPopUp (colseEvent)="close($event)">
-              <smom-edit-product-form *ngIf="isOpenPopup" [product]="product"></smom-edit-product-form>
+
+            <router-outlet></router-outlet>
+
+            <!--<smom-popup #myPopUp (colseEvent)="close($event)">
+    <smom-edit-product-form *ngIf="isOpenPopup" [product]="product"></smom-edit-product-form>
 
 
-            </smom-popup>
-
-            <smom-popup #myPopUpT (colseEvent)="close($event)">
-              <smom-edit-product-template-driven *ngIf="isOpenPopupT" [product]="product"></smom-edit-product-template-driven>
-            </smom-popup>
-
-
+  </smom-popup>-->
+            <!--<smom-popup #myPopUpT (colseEvent)="close($event)">
+    <smom-edit-product-template-driven *ngIf="isOpenPopupT" [product]="product"></smom-edit-product-template-driven>
+  </smom-popup>-->
             <!-- /table -->
 
           </div> <!-- /panel-body -->

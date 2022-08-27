@@ -23,10 +23,20 @@ export class EditReactiveFOrmComponent implements OnInit {
   id: string = '';
   action: string = '';
   ngOnInit(): void {
-    this.id = this.ac?.snapshot.params?.['id'];
-    this.ps.getById(+this.id).subscribe((p) => {
-      this.product = p;
-      this.setFormGroup(p);
+
+    //this.id = this.ac?.snapshot.params?.['id'];
+    //this.ps.getById(+this.id).subscribe((p) => {
+    //  this.product = p;
+    //  this.setFormGroup(p);
+    //})
+
+
+    this.ac?.params.subscribe((p) => {
+      this.id = this.ac?.snapshot.params?.['id'];
+      this.ps.getById(+this.id).subscribe((p) => {
+        this.product = p;
+        this.setFormGroup(p);
+      })
     })
   }
 

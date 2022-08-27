@@ -6,21 +6,10 @@ import { LoginService } from '../service/login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate, CanLoad {
-
+export class LoadGuardGuard implements CanActivate, CanLoad {
   constructor(private ls: LoginService, private router: Router) {
 
   }
-    canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      if (this.ls.isLogin) {
-        return true;
-      } else {
-        this.ls.loginBehaviur.next(false);
-        this.router.navigate(['login']);
-        return false;
-      }
-    }
-
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -33,5 +22,15 @@ export class LoginGuard implements CanActivate, CanLoad {
       return false;
     }
   }
-  
+  canLoad(
+    route: Route,
+    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (this.ls.isLogin) {
+      return true;
+    } else {
+      this.ls.loginBehaviur.next(false);
+      this.router.navigate(['login']);
+      return false;
+    }
+  }
 }
