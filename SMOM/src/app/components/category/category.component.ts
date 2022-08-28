@@ -13,7 +13,7 @@ import { SmsMessage } from '../../service/sms-message';
 
 function MyMap(fun: any) {
 
-  return function (Obs: Observable<any>) {   //currying function 
+  return function (Obs: Observable<any>) {   //currying function
     return new Observable((o: Observer<any>) => {
       Obs.subscribe((r) => {
         o.next(fun(r))
@@ -31,7 +31,7 @@ function MyMap(fun: any) {
 }
 
 function MyFilter(fun: any) {
-  return function (Obs: Observable<any>) {   //currying function 
+  return function (Obs: Observable<any>) {   //currying function
     return new Observable((o: Observer<any>) => {
       Obs.subscribe((r) => {
         let t = fun(r);
@@ -39,7 +39,7 @@ function MyFilter(fun: any) {
         if (fun(r)) {
           o.next(r)
         }
-      
+
       },
         (err) => {
 
@@ -66,8 +66,8 @@ function MySkip(num: number) {
         }
         i = i + 1;
 
-         
-        
+
+
 
       },
         (err) => {
@@ -166,7 +166,7 @@ export class CategoryComponent implements OnInit {
     this.cal.startPromise().then((res: any) => {
       this.timePromise = res;
     });
-     
+
   }
 
   currentLocation: string = "";
@@ -225,7 +225,7 @@ export class CategoryComponent implements OnInit {
 
   getFilter() {
     of(1, 23, 6, 8, 9, 5, 2, 7, 16, 18).pipe(MyFindIndex((x: any)=>x==2)).subscribe((r) => {
- 
+
       console.log(`I am in of ${r}`)
     })
   }
@@ -235,7 +235,7 @@ export class CategoryComponent implements OnInit {
       this.cal.stopObsInterVal();
       this.mysub.unsubscribe();
     }
-  
+
   }
 
   mysub!: Subscription;
@@ -246,10 +246,11 @@ export class CategoryComponent implements OnInit {
     });
 
   }
+  isTrue=false;
   async calc(a: any, b: any) {
 
 
-
+//this.isTrue=!this.isTrue;
     // try {
     //  this.result = await this.cal.devObs(a, b).toPromise();
     //  this.message = "";
@@ -283,7 +284,7 @@ export class CategoryComponent implements OnInit {
     //} catch (ex) {
     //  this.message = ex;
     //}
-  
+
     //this.cal.devPromise(a, b).then((res) => {
     //  this.result = res;
     //  this.message = "";
@@ -309,7 +310,7 @@ export class CategoryComponent implements OnInit {
     //  this.message = ex;
     //  this.result = "";
     //}
-   
+
   }
 
   //Association -> Reusability
@@ -320,8 +321,8 @@ export class CategoryComponent implements OnInit {
   //Interface -> Reusability + Readability
   //Assciation +Interface/Abstract/Virtual=> Dependency Inversion;
   //-->Dependency Injection
-  //-->Service Locator 
-  //Dependency Inversion  + Third party Object Creation=> Inversion of Control 
+  //-->Service Locator
+  //Dependency Inversion  + Third party Object Creation=> Inversion of Control
   getPrefered(type: string) {
     if (type == 'Email') {
       return new EmailMessage();  //run time polimorphisim
@@ -336,7 +337,7 @@ export class CategoryComponent implements OnInit {
     let message: Message = new Message();
     let message2: SmsMessage = new SmsMessage();
     let message3: EmailMessage = new EmailMessage();
-    
+
     let emp: Employee = new Employee(address);
     let emp2: Employee = new Employee();
     emp2.setCompanyAddress(address);
@@ -349,7 +350,7 @@ export class CategoryComponent implements OnInit {
     emp.PreferedMessage = message2;
     emp2.setCompanyAddress(address);
     emp2.companyAddress = address;
-    emp2.PreferedMessage = m; //service locator //run  time 
+    emp2.PreferedMessage = m; //service locator //run  time
 
 
 
@@ -363,7 +364,7 @@ export class CategoryComponent implements OnInit {
       return a[columnName]>b[columnName]? -1*orderBy : 1*orderBy;
     })
   }
-  
+
   ngOnInit(): void {
    //this.first
   }

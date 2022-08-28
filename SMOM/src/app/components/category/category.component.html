@@ -5,6 +5,8 @@
       <input type="text" #a />
       <input type="text" #b />
 
+      <app-first [data]="isTrue"></app-first>
+
       <button type="button" (click)="calc(a.value,b.value)">=</button>
       <span>{{result}}</span>
 
@@ -54,6 +56,30 @@
           <td [innerHTML]="category.description" style="width: 30%;"></td>
         </tr>
       </table>
+
+
+
+
+      <smom-qdn-accordian>
+          <ng-template smomQdnAccordian header="FIrst" isShow="1">
+
+              I am in First
+          </ng-template>
+
+          <ng-template smomQdnAccordian header="Second" isShow="0">
+
+            I am in Second
+        </ng-template>
+
+        <ng-template smomQdnAccordian header="Third" isShow="1">
+
+          I am in Third
+      </ng-template>
+
+
+      </smom-qdn-accordian>
+
+
     </div>
   </div>
 </div>

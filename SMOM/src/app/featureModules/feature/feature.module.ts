@@ -8,7 +8,9 @@ import { PopupComponent } from './popup/popup.component';
 import { FormModelDirective } from './form/form-model.directive';
 import { FormDirective } from './form/form.directive';
 import { DateDirective } from './date.directive';
- 
+import { QdnAccordianComponent } from './qdn-accordian/qdn-accordian.component';
+import { QdnAccordianDirective } from './qdn-accordian.directive';
+
 
 
 @NgModule({
@@ -21,12 +23,16 @@ import { DateDirective } from './date.directive';
     FormModelDirective,
     FormDirective,
     DateDirective,
-    
+    QdnAccordianComponent,
+    QdnAccordianDirective,
+
   ],
   imports: [
     CommonModule
   ],
   exports: [PagingComponent, TableComponent, ActionDirective,
-    FilterDirective, PopupComponent, FormModelDirective, FormDirective, DateDirective]
+    FilterDirective, PopupComponent, FormModelDirective, FormDirective, DateDirective,
+    QdnAccordianComponent, QdnAccordianDirective
+  ]
 })
 export class FeatureModule { }
