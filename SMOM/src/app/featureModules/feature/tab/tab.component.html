@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item" *ngFor="let t of tab" (click)="show(t)">
+    <a class="nav-link" [class.active]="t.isShow=='1'" >{{t.header}}</a>
+  </li>
+
+</ul>
+
+<div *ngIf="tempRef">
+  <div  *ngTemplateOutlet="tempRef">
+  </div>
+</div>

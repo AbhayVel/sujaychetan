@@ -10,6 +10,8 @@ import { FormDirective } from './form/form.directive';
 import { DateDirective } from './date.directive';
 import { QdnAccordianComponent } from './qdn-accordian/qdn-accordian.component';
 import { QdnAccordianDirective } from './qdn-accordian.directive';
+import { TabDirective } from './tab.directive';
+import { TabComponent } from './tab/tab.component';
 
 
 
@@ -25,6 +27,8 @@ import { QdnAccordianDirective } from './qdn-accordian.directive';
     DateDirective,
     QdnAccordianComponent,
     QdnAccordianDirective,
+    TabDirective,
+    TabComponent,
 
   ],
   imports: [
@@ -32,7 +36,8 @@ import { QdnAccordianDirective } from './qdn-accordian.directive';
   ],
   exports: [PagingComponent, TableComponent, ActionDirective,
     FilterDirective, PopupComponent, FormModelDirective, FormDirective, DateDirective,
-    QdnAccordianComponent, QdnAccordianDirective
+    QdnAccordianComponent, QdnAccordianDirective,
+    TabComponent,TabDirective
   ]
 })
 export class FeatureModule { }

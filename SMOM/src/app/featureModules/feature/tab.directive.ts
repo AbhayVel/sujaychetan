@@ -1,16 +1,14 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[smomQdnAccordian]'
+  selector: '[smomTab]'
 })
-export class QdnAccordianDirective {
+export class TabDirective {
 
   @Input() header? : string;
   @Input() isShow? : string;
 
   constructor(public temp: TemplateRef<any>) {
   }
-
-
 
 }

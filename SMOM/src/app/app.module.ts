@@ -30,6 +30,7 @@ import { GlobalErrorHandler } from './utilities/MyError';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +77,7 @@ import { GlobalErrorHandler } from './utilities/MyError';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    
+
   ],
   providers: [FirstService,
 
