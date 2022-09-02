@@ -41,9 +41,10 @@ export class TableComponent implements OnInit, AfterContentInit, OnChanges {
   constructor() { }
     ngOnChanges(changes: SimpleChanges): void {
       getGridPaging(this.filterObject, this.sortObj);
-      
+
     }
     ngAfterContentInit(): void {
+      debugger;
       this.filter?.forEach((e: any) => {
         this.filterElements[e.name] = e.temp;
       })
@@ -55,6 +56,7 @@ export class TableComponent implements OnInit, AfterContentInit, OnChanges {
     }
 
   ngOnInit(): void {
+    debugger;
     this.sortObj = this.filterObject.sortObj;
     getGridPaging(this.filterObject, this.sortObj);
   }
@@ -73,24 +75,24 @@ export class TableComponent implements OnInit, AfterContentInit, OnChanges {
     } else {
       getGridPaging(this.filterObject, this.sortObj);
     }
-   
+
   }
 
-  filterDataDirect(columnName: string, value: any) {    
-    this.filterObject.filter[columnName].value = value; 
+  filterDataDirect(columnName: string, value: any) {
+    this.filterObject.filter[columnName].value = value;
     getGridPaging(this.filterObject, this.sortObj);
   }
 
   filterData(columnName: string, eve: any) {
     let value = eve.target.value;
     this.filterObject.filter[columnName].value = value;
- 
+
     // this.pageChange(this.filterObject.currentPage);
     getGridPaging(this.filterObject, this.sortObj);
   }
 
 
- 
+
 
   sort(columnName: any, sortType: any) {
     if (this.sortObj) {
@@ -98,7 +100,7 @@ export class TableComponent implements OnInit, AfterContentInit, OnChanges {
       this.sortObj.columnName = columnName;
       this.sortObj.sortType = sortType;
     }
- 
+
     getGridPaging(this.filterObject, this.sortObj);
   }
 

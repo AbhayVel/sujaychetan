@@ -57,14 +57,14 @@
 
             <router-outlet></router-outlet>
 
-            <!--<smom-popup #myPopUp (colseEvent)="close($event)">
+           <smom-popup #myPopUp (colseEvent)="close($event)"  *ngIf="isOpenPopupT">
     <smom-edit-product-form *ngIf="isOpenPopup" [product]="product"></smom-edit-product-form>
 
 
-  </smom-popup>-->
-            <!--<smom-popup #myPopUpT (colseEvent)="close($event)">
+  </smom-popup>
+           <smom-popup #myPopUpT   (colseEvent)="close($event)" *ngIf="isOpenPopupT">
     <smom-edit-product-template-driven *ngIf="isOpenPopupT" [product]="product"></smom-edit-product-template-driven>
-  </smom-popup>-->
+  </smom-popup>
             <!-- /table -->
 
           </div> <!-- /panel-body -->
@@ -195,7 +195,7 @@
               </ul>
 
               <!-- Tab panes -->
-        
+
             </div>
 
             </div> <!-- /modal-body -->
